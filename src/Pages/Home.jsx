@@ -123,22 +123,8 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Featured Products */}
-        <section className="py-14 sm:py-20 bg-[#1E4A1E]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8 sm:mb-12">
-              <div>
-                <span className="text-[#8DC21F] font-extrabold text-xs uppercase tracking-widest">Handpicked For You</span>
-                <h2 className="font-black text-white text-3xl sm:text-4xl mt-1">Featured <span className="text-[#8DC21F]">Products</span></h2>
-              </div>
-              <button onClick={() => setPage("products")} className="bg-gradient-to-r from-[#8DC21F] to-[#7AB01A] text-white font-bold px-5 py-2.5 rounded-xl text-sm hover:from-[#A8D832] hover:to-[#8DC21F] transition-all self-start sm:self-auto">View All →</button>
-            </div>
-              
-          </div>
-        </section>
-
         {/* Categories */}
-        <section className="py-14 sm:py-20 bg-white">
+        <section className="py-14 sm:py-10 sm:mb-10 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8 sm:mb-12">
               <span className="text-[#8DC21F] font-extrabold text-xs uppercase tracking-widest">Browse By</span>
@@ -171,9 +157,10 @@ const Home = () => {
         <section className="py-12 sm:py-16 bg-gradient-to-r from-[#8DC21F] to-[#7AB01A] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2" />
           <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
-            <h2 className="font-black text-white text-2xl sm:text-4xl mb-3">🌿 Free Delivery on Orders Over ₹499!</h2>
-            <p className="text-white/85 text-sm sm:text-base mb-6">Use code <strong className="bg-white/20 px-3 py-1 rounded-lg">YUGAN20</strong> for 20% off your first order</p>
-            <button onClick={() => setPage("products")} className="bg-white text-[#2D6A2D] font-black px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base shadow-2xl hover:-translate-y-1 hover:shadow-3xl transition-all">Start Shopping →</button>
+            <h2 className="font-black text-white text-2xl sm:text-4xl mb-3">🌿 Free Delivery on Orders Over ₹999!</h2>
+                    <p className="text-white/85 text-sm sm:text-base mb-6">Use code <strong className="bg-white/20 px-3 py-1 rounded-lg">YUGAN20</strong> for 20% off your first order</p>
+                    <Link to={"/products"}>
+            <button className="bg-white text-[#2D6A2D] font-black px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base shadow-2xl hover:-translate-y-1 hover:shadow-3xl transition-all">Start Shopping →</button></Link>
           </div>
         </section>
 
@@ -186,9 +173,9 @@ const Home = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {[
-                {name:"Priya Sharma",loc:"Chennai",text:"The 7-grain flour is absolutely amazing! My family's health has improved noticeably. Will never go back to regular flour.",stars:5},
-                {name:"Rajesh Kumar",loc:"Bangalore",text:"The Kitchen King Masala is the real deal! Restaurant-quality curries at home now. My guests always ask for the recipe!",stars:5},
-                {name:"Anitha Rajan",loc:"Mumbai",text:"Super seeds mix in my morning smoothie is a game changer. Packaging is beautiful and delivery was super fast.",stars:5},
+                {name:"Varsha",loc:"Coimbatore",text:"Hi! My baby wasn't eating food properlt, so I bought 500Grms of MULTIGRAIN MIX from YUGAN'S PRODUCT. Now, My baby loves taking it and it's so nutritious!",stars:5},
+                {name:"Janani Alaguvel",loc:"Karur",text:"I had been feeding my baby with the Multigrain Mix and it was so nice to eat!",stars:5},
+                {name:"Meenachi",loc:"Chennai",text:"The multigrain mix is fantastic! My family loves it and it's so healthy and I have bought a Masala which is in aromatic style!",stars:5},
               ].map(t => (
                 <div key={t.name} className="bg-white rounded-2xl p-5 sm:p-6 shadow-sm border border-[#E8F2D0]">
                   <div className="text-amber-400 text-base mb-3">{"★".repeat(t.stars)}</div>
@@ -210,25 +197,27 @@ const Home = () => {
               <div className="col-span-2 sm:col-span-2 lg:col-span-1">
                 <div className="flex items-center gap-3 mb-4">
                   <div className="w-10 h-10 rounded-full bg-[#8DC21F] flex items-center justify-center font-black text-white text-lg shadow-lg">Y</div>
-                  <div><div className="text-[#8DC21F] font-black text-base">Yugan's Products</div><div className="text-[#6abf6a] text-[10px] italic">Meal time in a Minute</div></div>
+                  <div><div className="text-[#8DC21F] font-black text-base">Yugan's Product</div><div className="text-[#6abf6a] text-[10px] italic">Meal time in a Minute</div></div>
                 </div>
                 <p className="text-gray-400 text-sm leading-relaxed">Premium quality multigrains, masalas and spices sourced from the finest farms across India.</p>
               </div>
               <div>
                 <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Quick Links</h4>
-                {[["home","Home"],["products","Products"],["cart","Cart"],["contact","Contact"]].map(([p,l]) => (
-                  <button key={p} onClick={() => setPage(p)} className="block text-gray-400 hover:text-[#8DC21F] text-sm mb-2 transition-colors">{l}</button>
-                ))}
+                <div className="text-gray-400 text-sm mb-2">
+                  <Link to="/"><p className="mb-2">Home</p></Link>
+                  <Link to="/products"><p className="mb-2">Products</p></Link>
+                  <Link to="/"> <p className="mb-2">Contact</p></Link>
+                </div>
               </div>
               <div>
                 <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Categories</h4>
-                {["Multigrains","Masalas","Seeds","Spices","Flours","Blends"].map(c => (
+                {["Multigrains","Masalas","Porridge"].map(c => (
                   <div key={c} className="text-gray-400 text-sm mb-2">{c}</div>
                 ))}
               </div>
               <div>
                 <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
-                {["📍 Chennai, Tamil Nadu","📞 +91 98765 43210","✉️ hello@yugans.com","⏰ Mon-Sat: 9am–6pm"].map(c => (
+                {["📍 Karur, Tamil Nadu","📞 +91 63812 10833","📧 yugansproduct@gmail.com","⏰ Monday-Sunday: 9am–6pm"].map(c => (
                   <div key={c} className="text-gray-400 text-xs sm:text-sm mb-2">{c}</div>
                 ))}
               </div>
@@ -236,7 +225,7 @@ const Home = () => {
           </div>
           <div className="border-t border-white/10 py-4 px-4 sm:px-6">
             <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-              <p className="text-gray-500 text-xs">© 2024 Yugan's Products. All rights reserved.</p>
+              <p className="text-gray-500 text-xs">© 2026 Yugan's Products. All rights reserved.</p>
               <div className="flex gap-4 text-xs text-gray-500"><span>🌿 Natural</span><span>🏆 Quality</span><span>🚚 Fast</span></div>
             </div>
           </div>
