@@ -44,7 +44,7 @@ const authController = {
             console.log(loggedUser);
 
             if (!loggedUser) {
-                return res.status(404).json({ Message: "No Account Found!! Please Register" });
+                return res.status(404).json({ Message: "No Account Found!! Please Signup" });
             }
 
             const isPasswordvalid = await bcrypt.compare(Password, loggedUser.Password);
@@ -66,6 +66,76 @@ const authController = {
         }
         catch(error) {
              return res.status(400).json({ Message: `Error found on Login!! ${error.message}` });
+        }
+    },
+    googleUser: async (req, res) => {
+    try {
+        const { Name, Email } = req.body;
+
+        const alreadyRegister = await Auth.findOne({ Email });
+
+        if (alreadyRegister) {
+            const token = jwt.sign(
+                { id: alreadyRegister._id },
+                process.env.JWT_SECRET,
+                { expiresIn: "3h" }
+            );
+
+            res.cookie("Token", token, {
+                httpOnly: true,
+                secure: false,
+                sameSite: "Strict"
+            });
+
+            return res.status(200).json({
+                Message: "Login Successful!",
+                user: alreadyRegister
+            });
+        }
+
+        const newUser = new Auth({ Name, Email });
+
+        const userRole = await Auth.find();
+        if (userRole.length === 0) {
+            newUser.Role = "Admin";
+        }
+
+        const saveduser = await newUser.save();
+
+        const token = jwt.sign(
+            { id: saveduser._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "3h" }
+        );
+
+        res.cookie("Token", token, {
+            httpOnly: true,
+            secure: false,
+            sameSite: "Strict"
+        });
+
+        return res.status(200).json({
+            Message: "Account Registered & Login Successful!",
+            user: saveduser
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            Message: `Registration Failed! , ${error.message}`
+        });
+    }
+},
+    me: async (req, res) => {
+        try {
+            const userid = req.userID;
+            
+            const user = await Auth.findById(userid);
+
+            return res.status(200).json({ Message: "User Logged in", user: user });
+
+        }
+        catch (error) {
+            return res.status(500).json({ Message: "Error found on Login!!" });
         }
     }
 }

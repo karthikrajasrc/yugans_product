@@ -33,21 +33,21 @@ const LoginRegister = ({ authModal, setAuthModal }) => {
       const res = await googleLogin();
 
       const user = res.user;
-
-      console.log(user);
-
+  
     
-    const response = await instance.post("/auth/register", {
+    const response = await instance.post("/auth/googlelogin", {
       Name: user.displayName,
       Email:  user.email,
-      Password: user.uid
     });
+
+      toast.success("Login Successful ✅");
 
     console.log(response.data);
 
     } catch (err) {
-      console.log(err.message);
-    }
+    const msg = err.response?.data?.Message || "Login Failed";
+    toast.error(msg);
+  }
   }
 
   const handleLogin = async () => {
