@@ -2,6 +2,7 @@ import { createBrowserRouter, RouterProvider } from "react-router"
 import Navbar from "./Components/Navbar"
 import Home from "./Pages/Home"
 import Product from "./Pages/Product"
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
 
@@ -24,6 +25,7 @@ const App = () => {
 
   return (
       <>
+          <Toaster position="top-center" reverseOrder={false} />
           <RouterProvider router={router} />
       </>
   )

@@ -135,8 +135,8 @@ const Home = () => {
                 {name:"Multigrains",emoji:"🌾",img: multigrain ,grad:"from-amber-500/80 to-amber-700/80"},
                 {name:"Masalas",emoji:"🌶️",img: masala,grad:"from-red-200/50 to-red-200/50"},
                 {name:"Porridge's",emoji:"🌱",img: grains ,grad:"from-emerald-500/80 to-emerald-700/80"}
-              ].map(c => (<Link to={"/products"}>
-                <button key={c.name} 
+              ].map(c => (<Link to={"/products"} key={c.name}>
+                <button  
                   className="relative h-32 sm:h-44 rounded-2xl overflow-hidden group cursor-pointer text-left">
                   <img src={c.img} alt={c.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onError={e=>e.target.src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80"} />

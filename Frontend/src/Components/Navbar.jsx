@@ -1,7 +1,7 @@
 import { useState } from "react";
 import logo from "../Images/logo.png"
 import { Link, Outlet } from "react-router";
-import LoginRegister from "./Login&Register";
+import LoginRegister from "./LoginRegister";
 
 const Navbar = () => {
     const [page, setPage] = useState("home");
