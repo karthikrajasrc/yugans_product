@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 
 const PRODUCTS = [
   { id: 1, name: "7-Grain Multigrain Flour", price: 199, originalPrice: 249, category: "multigrain", rating: 4.8, reviews: 234, badge: "Best Seller", weight: "1kg", featured: true, benefits: ["High Fiber", "Protein Rich", "No Preservatives"], img: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80", desc: "Premium blend of 7 wholesome grains – wheat, oats, barley, ragi, jowar, bajra & corn. Rich in fiber and essential nutrients." },
@@ -103,7 +104,46 @@ const Product = () => {
                         {filteredProducts.map(p => <ProductCard key={p.id} product={p} />)}
                     </div>
                 )}
+        </div>
+        <footer className="bg-[#1E4A1E] text-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+              <div className="col-span-2 sm:col-span-2 lg:col-span-1">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-[#8DC21F] flex items-center justify-center font-black text-white text-lg shadow-lg">Y</div>
+                  <div><div className="text-[#8DC21F] font-black text-base">Yugan's Product</div><div className="text-[#6abf6a] text-[10px] italic">Meal time in a Minute</div></div>
+                </div>
+                <p className="text-gray-400 text-sm leading-relaxed">Premium quality multigrains, masalas and spices sourced from the finest farms across India.</p>
+              </div>
+              <div>
+                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Quick Links</h4>
+                <div className="text-gray-400 text-sm mb-2">
+                  <Link to="/"><p className="mb-2">Home</p></Link>
+                  <Link to="/products"><p className="mb-2">Products</p></Link>
+                  <Link to="/"> <p className="mb-2">Contact</p></Link>
+                </div>
+              </div>
+              <div>
+                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Categories</h4>
+                {["Multigrains","Masalas","Porridge"].map(c => (
+                  <div key={c} className="text-gray-400 text-sm mb-2">{c}</div>
+                ))}
+              </div>
+              <div>
+                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
+                {["📍 Karur, Tamil Nadu","📞 +91 63812 10833","📧 yugansproduct@gmail.com","⏰ Monday-Sunday: 9am–6pm"].map(c => (
+                  <div key={c} className="text-gray-400 text-xs sm:text-sm mb-2">{c}</div>
+                ))}
+              </div>
             </div>
+          </div>
+          <div className="border-t border-white/10 py-4 px-4 sm:px-6">
+            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+              <p className="text-gray-500 text-xs">© 2026 Yugan's Products. All rights reserved.</p>
+              <div className="flex gap-4 text-xs text-gray-500"><span>🌿 Natural</span><span>🏆 Quality</span><span>🚚 Fast</span></div>
+            </div>
+          </div>
+        </footer>
         </div>
     </>);
 };
@@ -144,7 +184,7 @@ const ProductCard = ({ product }) => (
           </button>
         </div>
       </div>
-    </div>
+  </div>
   );
 
 export default Product;

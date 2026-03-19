@@ -3,6 +3,9 @@ import multigrain from "../Images/multigrain.webp"
 import masala from "../Images/masalaimg.webp"
 import grains from "../Images/grainimg.webp"
 import { Link } from "react-router";
+import { useContext } from "react";
+import { AuthContext } from "../../Authprovider.jsx";
+import Spinner from "../Components/Spinner.jsx";
 
 
 
@@ -35,12 +38,24 @@ const Stars = ({ rating }) => (
 );
 
 
-const Home = () => {
+const LoggedHome = () => {
 
       const [page, setPage] = useState("home");
       const [category, setCategory] = useState("all");
-      const [user, setUser] = useState(null);
-      const [heroSlide, setHeroSlide] = useState(0);
+    const [heroSlide, setHeroSlide] = useState(0);
+    const { user, loading } = useContext(AuthContext);
+
+
+         useEffect(() => {
+        const t = setInterval(() => setHeroSlide(s => (s + 1) % 3), 3000);
+        return () => clearInterval(t);
+         }, []);
+    
+    
+    if (loading) {
+        console.log(loading);
+        return <Spinner />
+    }
    
 
            const heroSlides = [
@@ -50,12 +65,10 @@ const Home = () => {
   ];
     const slide = heroSlides[heroSlide];
 
-     useEffect(() => {
-        const t = setInterval(() => setHeroSlide(s => (s + 1) % 3), 3000);
-        return () => clearInterval(t);
-     }, []);
-  
-  
+
+    
+    
+    
     
  
     return (
@@ -66,7 +79,7 @@ const Home = () => {
           <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-72 sm:h-72 bg-[#8DC21F]/8 rounded-full blur-3xl" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 w-full">
             <div className="animate-[fadeIn_0.6s_ease-out] order-2 lg:order-1">
-              <span className="inline-block bg-[#8DC21F]/20 border border-[#8DC21F]/40 text-[#8DC21F] text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full mb-4 sm:mb-6">{slide.badge}</span>
+                        <span className="inline-block bg-[#8DC21F]/20 border border-[#8DC21F]/40 text-[#8DC21F] text-xs sm:text-sm font-bold px-4 py-1.5 rounded-full mb-4 sm:mb-6">{slide.badge}</span>
               <h1 className="font-black leading-tight mb-4 sm:mb-6">
                 <span className="text-[#8DC21F] text-4xl sm:text-5xl lg:text-6xl xl:text-7xl block">{slide.title}</span>
                 <span className="text-white text-4xl sm:text-5xl lg:text-6xl xl:text-7xl block">{slide.sub}</span>
@@ -206,9 +219,10 @@ const Home = () => {
               <div>
                 <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Quick Links</h4>
                 <div className="text-gray-400 text-sm mb-2">
-                  <Link to="/"><p className="mb-2">Home</p></Link>
-                  <Link to="/products"><p className="mb-2">Products</p></Link>
-                  <Link to="/"> <p className="mb-2">Contact</p></Link>
+                  <Link to="/home"><p className="mb-2">Home</p></Link>
+                  <Link to="/product"><p className="mb-2">Products</p></Link>
+                   <Link to="/cart"> <p className="mb-2">Cart</p></Link>
+                   <Link to="/orders"> <p className="mb-2">Orders</p></Link>
                 </div>
               </div>
               <div>
@@ -236,4 +250,4 @@ const Home = () => {
     );
   };
 
-  export default Home;
+  export default LoggedHome;

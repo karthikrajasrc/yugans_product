@@ -1,13 +1,18 @@
 import { useContext } from "react";
-import { AuthContext } from "../Auth/authProvider";
-import { Navigate } from "react-router-dom";
+import { AuthContext } from "../../Authprovider.jsx";
+import { Navigate } from "react-router";
+import toast from "react-hot-toast";
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
 
   if (loading) return <p>Loading...</p>;
 
-  return user ? children : <Navigate to="/" />;
+  if (!user) {
+    return <Navigate to="/" replace />; 
+  }
+
+return children;
 };
 
 export default ProtectedRoute;

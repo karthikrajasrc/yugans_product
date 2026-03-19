@@ -6,7 +6,11 @@ const jwt = require("jsonwebtoken");
 const authController = {
     registerUser: async (req, res) => {
         try {
-      const { Name, Email, Password } = req.body;
+            const { Name, Email, Password } = req.body;
+            
+            if (Name === "" || Email === "" || Password === "") {
+                return res.status(400).json({Message: "Please Fill required Fields!"})
+            }
 
             const alreadyRegister = await Auth.findOne({ Email });
 
@@ -131,11 +135,20 @@ const authController = {
             
             const user = await Auth.findById(userid);
 
-            return res.status(200).json({ Message: "User Logged in", user: user });
+            return res.status(200).json({ user: user });
 
         }
         catch (error) {
             return res.status(500).json({ Message: "Error found on Login!!" });
+        }
+    }, logout: async (req, res) => {
+        try {
+            // clear the cookie from the browser
+            res.clearCookie('Token');
+
+            return res.status(200).json({ message: 'logout successful' });
+        } catch (error) {
+            return res.status(500).json({ message: `logout failed: ${error.message}` });
         }
     }
 }

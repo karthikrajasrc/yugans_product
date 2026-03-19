@@ -7,7 +7,7 @@ const auth = {
             const token = req.cookies?.Token;
 
             if (!token) {
-                return res.status(500).json({ Message: "No token provided!" })
+                return res.status(401).json({ Message: "No token provided!" })
             }
 
             const isvalidToken = jwt.verify(token, process.env.JWT_SECRET)
