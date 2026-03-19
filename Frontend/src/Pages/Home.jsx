@@ -61,7 +61,7 @@ const Home = () => {
     return (
       <div className="overflow-x-hidden">
         {/* Hero */}
-        <section className="relative min-h-[80vh] sm:min-h-[85vh] bg-gradient-to-br from-[#0A2010] via-[#1E4A1E] to-[#2D6A2D] overflow-hidden flex items-center">
+        <section className="relative min-h-[80vh] sm:min-h-[85vh] bg-linear-to-br from-[#0A2010] via-[#1E4A1E] to-[#2D6A2D] overflow-hidden flex items-center">
           <div className="absolute top-0 right-0 w-72 h-72 sm:w-96 sm:h-96 bg-[#8DC21F]/10 rounded-full blur-3xl" />
           <div className="absolute bottom-0 left-0 w-48 h-48 sm:w-72 sm:h-72 bg-[#8DC21F]/8 rounded-full blur-3xl" />
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center relative z-10 w-full">
@@ -73,7 +73,7 @@ const Home = () => {
               </h1>
               <p className="text-gray-300 text-base sm:text-lg mb-6 sm:mb-8 max-w-lg leading-relaxed">{slide.desc}</p>
               <div className="flex flex-wrap gap-3">
-                <button onClick={() => setPage("products")} className="bg-gradient-to-r from-[#8DC21F] to-[#7AB01A] text-white font-black px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base hover:from-[#A8D832] hover:to-[#8DC21F] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#8DC21F]/40 transition-all active:scale-95">Shop Now →</button>
+                <button onClick={() => setPage("products")} className="bg-linear-to-r from-[#8DC21F] to-[#7AB01A] text-white font-black px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base hover:from-[#A8D832] hover:to-[#8DC21F] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#8DC21F]/40 transition-all active:scale-95">Shop Now →</button>
               </div>
               <div className="flex gap-8 sm:gap-10 mt-8 pt-6 sm:pt-8 border-t border-white/15">
                 {[["50+","Products"],["2K+","Customers"],["100%","Natural"]].map(([v,l]) => (
@@ -142,7 +142,7 @@ const Home = () => {
                   className="relative h-32 sm:h-44 rounded-2xl overflow-hidden group cursor-pointer text-left">
                   <img src={c.img} alt={c.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     onError={e=>e.target.src="https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80"} />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${c.grad}`} />
+                  <div className={`absolute inset-0 bg-linear-to-t ${c.grad}`} />
                   <div className="absolute inset-0 flex flex-col items-center justify-center text-white">
                     <span className="text-2xl sm:text-3xl mb-1">{c.emoji}</span>
                     <span className="font-extrabold text-sm sm:text-base">{c.name}</span>
@@ -156,7 +156,7 @@ const Home = () => {
         </section>
 
         {/* Banner */}
-        <section className="py-12 sm:py-16 bg-gradient-to-r from-[#8DC21F] to-[#7AB01A] relative overflow-hidden">
+        <section className="py-12 sm:py-16 bg-linear-to-r from-[#8DC21F] to-[#7AB01A] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2" />
           <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
             <h2 className="font-black text-white text-2xl sm:text-4xl mb-3">🌿 Free Delivery on Orders Over ₹999!</h2>

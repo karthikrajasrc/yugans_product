@@ -153,7 +153,7 @@ const Product = () => {
 const ProductCard = ({ product }) => (
       
     <div className="bg-white rounded-2xl overflow-hidden shadow-sm border border-green-50 hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300 flex flex-col group">
-      <div className="relative h-44 sm:h-48 overflow-hidden bg-green-50 flex-shrink-0">
+      <div className="relative h-44 sm:h-48 overflow-hidden bg-green-50 shrink-0">
         <img src={product.img} alt={product.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
           onError={e => e.target.src = "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80"} />
@@ -179,7 +179,7 @@ const ProductCard = ({ product }) => (
             {product.originalPrice && <span className="text-gray-300 line-through text-xs ml-1">₹{product.originalPrice}</span>}
           </div>
           <button onClick={() => addToCart(product)}
-            className="bg-gradient-to-br from-[#8DC21F] to-[#7AB01A] text-white text-xs font-extrabold px-3 py-2 rounded-xl hover:from-[#A8D832] hover:to-[#8DC21F] transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#8DC21F]/40 flex items-center gap-1 active:scale-95">
+            className="bg-linear-to-br from-[#8DC21F] to-[#7AB01A] text-white text-xs font-extrabold px-3 py-2 rounded-xl hover:from-[#A8D832] hover:to-[#8DC21F] transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-[#8DC21F]/40 flex items-center gap-1 active:scale-95">
             🛒 Add
           </button>
         </div>
