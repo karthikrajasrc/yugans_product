@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import multigrain from "../Images/multigrain.webp"
+import multigrain from "../Images/Multigrain.webp"
 import masala from "../Images/masalaimg.webp"
 import grains from "../Images/grainimg.webp"
 import { Link } from "react-router";
