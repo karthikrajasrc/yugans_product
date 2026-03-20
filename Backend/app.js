@@ -6,14 +6,10 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const router = require("./Routers/Payment");
 
-const isProduction = process.env.NODE_ENV === "production";
-
 app.use(cookieParser());
 
 app.use(cors({
-  origin: isProduction
-    ? "https://yugansproduct.netlify.app"
-    : "http://localhost:5173",
+  origin: "https://yugansproduct.netlify.app",
   credentials: true
 }));
 
