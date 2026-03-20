@@ -20,7 +20,7 @@ const Navbar = () => {
             const response = await instance.post("/auth/logout");
             setUser(null);
             toast.success("Logout Successful ✅");
-            navigate("");
+            navigate("/");
             
         }
         catch (error) {
@@ -82,6 +82,11 @@ const Navbar = () => {
                                     className="px-4 py-2 rounded-full text-sm font-bold transition-all bg-[#8DC21F] text-white shadow-md text-white-300 hover:text-[#8DC21F] hover:bg-white/10">Cart</button></Link>
                                 <Link to="/orders"><button 
                                     className="px-4 py-2 rounded-full text-sm font-bold transition-all bg-[#8DC21F] text-white shadow-md text-white-300 hover:text-[#8DC21F] hover:bg-white/10">Orders</button></Link>
+                                {user?.Role === "Admin" && (
+                        <div>
+                            <Link to="/admin"><button className="px-4 py-2 rounded-full text-sm font-bold transition-all bg-[#8DC21F] text-white shadow-md text-white-300 hover:text-[#8DC21F] hover:bg-white/10">Admin</button></Link>
+                        </div>
+                    )}
                                 </div>
                             )}  
                         
@@ -123,9 +128,15 @@ const Navbar = () => {
                                 <Link to="/home"><button onClick={() => setMobileMenu(false)} className="w-full my-1 text-left px-4 py-3 rounded-xl text-sm font-bold transition-all bg-[#8DC21F] text-white hover:bg-white/10">🏠 Home</button></Link>
                                 <Link to="/product"><button onClick={() => setMobileMenu(false)} className="w-full my-1 text-left px-4 py-3 rounded-xl text-sm font-bold transition-all bg-[#8DC21F] text-white hover:bg-white/10">🛒 Product</button></Link>
                                 <Link to="/cart"><button onClick={() => setMobileMenu(false)} className="w-full my-1 text-left px-4 py-3 rounded-xl text-sm font-bold transition-all bg-[#8DC21F] text-white hover:bg-white/10">🛍️ Cart</button></Link>
-                                <Link to="/orders"><button onClick={() => setMobileMenu(false)} className="w-full my-1 text-left px-4 py-3 rounded-xl text-sm font-bold transition-all bg-[#8DC21F] text-white hover:bg-white/10">📦 Orders</button></Link>
-                                </div>
-                        )}
+                            <Link to="/orders"><button onClick={() => setMobileMenu(false)} className="w-full my-1 text-left px-4 py-3 rounded-xl text-sm font-bold transition-all bg-[#8DC21F] text-white hover:bg-white/10">📦 Orders</button></Link>
+                            {user?.Role === "Admin" && (
+                        <div>
+                            <Link to="/admin"><button onClick={() => setMobileMenu(false)} className="w-full my-1 text-left px-4 py-3 rounded-xl text-sm font-bold transition-all bg-[#8DC21F] text-white hover:bg-white/10">⚙️ Admin Panel</button></Link>
+                        </div>
+                    )}
+                        </div> 
+                    )}
+                    
                         
                         <div className="pt-2 border-t border-white/20">
                                 {!user && (<div className="flex gap-2 px-2">

@@ -8,6 +8,9 @@ import LoggedCart from "./Pages/LoggedCart";
 import LoggedOrders from "./Pages/LoggedOrders";
 import LoggedProducts from "./Pages/LoggedProducts";
 import ProtectedRoute from "./Routes/protectedRoutes";
+import Admin from "./Pages/Admin";
+import AdminRoute from "./Routes/AdminRoutes";
+import PublicRoute from "./Routes/PublicRoutes";
 
 const App = () => {
 
@@ -18,10 +21,10 @@ const App = () => {
             children: [
                 {
                     index: true,
-                    element: <Home /> 
+                    element: (<PublicRoute> <Home /> </PublicRoute> )  
                 }, {
                     path: "products",
-                    element: <Product />
+                    element: (<PublicRoute> <Product /> </PublicRoute> ) 
                 }, {
                     path: "home",
                     element: (<ProtectedRoute> <LoggedHome /> </ProtectedRoute>) 
@@ -34,6 +37,9 @@ const App = () => {
                 }, {
                     path: "orders",
                     element: (<ProtectedRoute> <LoggedOrders /> </ProtectedRoute>)
+                }, {
+                    path: "admin",
+                    element: (<AdminRoute> <Admin /> </AdminRoute>)
                 }
             ]
 

@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
     const getUser = async () => {
       try {
         const res = await instance.post("/auth/me");
-        setUser(res.data.user);
+        setUser(res.data.user || res.data);
       } catch (err) {
         setUser(null);
       }

@@ -86,7 +86,7 @@ const LoggedHome = () => {
               </h1>
               <p className="text-gray-300 text-base sm:text-lg mb-6 sm:mb-8 max-w-lg leading-relaxed">{slide.desc}</p>
               <div className="flex flex-wrap gap-3">
-                <button onClick={() => setPage("products")} className="bg-linear-to-r from-[#8DC21F] to-[#7AB01A] text-white font-black px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base hover:from-[#A8D832] hover:to-[#8DC21F] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#8DC21F]/40 transition-all active:scale-95">Shop Now →</button>
+                <Link to={"/product"}><button onClick={() => setPage("products")} className="bg-linear-to-r from-[#8DC21F] to-[#7AB01A] text-white font-black px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base hover:from-[#A8D832] hover:to-[#8DC21F] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#8DC21F]/40 transition-all active:scale-95">Shop Now →</button></Link>
               </div>
               <div className="flex gap-8 sm:gap-10 mt-8 pt-6 sm:pt-8 border-t border-white/15">
                 {[["50+","Products"],["2K+","Customers"],["100%","Natural"]].map(([v,l]) => (
@@ -150,7 +150,7 @@ const LoggedHome = () => {
                 {name:"Multigrains",emoji:"🌾",img: multigrain ,grad:"from-amber-500/80 to-amber-700/80"},
                 {name:"Masalas",emoji:"🌶️",img: masala,grad:"from-red-200/50 to-red-200/50"},
                 {name:"Porridge's",emoji:"🌱",img: grains ,grad:"from-emerald-500/80 to-emerald-700/80"}
-              ].map(c => (<Link to={"/products"} key={c.name}>
+              ].map(c => (<Link to={"/product"} key={c.name}>
                 <button  
                   className="relative h-32 sm:h-44 rounded-2xl overflow-hidden group cursor-pointer text-left">
                   <img src={c.img} alt={c.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
@@ -174,7 +174,7 @@ const LoggedHome = () => {
           <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
             <h2 className="font-black text-white text-2xl sm:text-4xl mb-3">🌿 Free Delivery on Orders Over ₹999!</h2>
                     <p className="text-white/85 text-sm sm:text-base mb-6">Use code <strong className="bg-white/20 px-3 py-1 rounded-lg">YUGAN20</strong> for 20% off your first order</p>
-                    <Link to={"/products"}>
+                    <Link to={"/product"}>
             <button className="bg-white text-[#2D6A2D] font-black px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base shadow-2xl hover:-translate-y-1 hover:shadow-3xl transition-all">Start Shopping →</button></Link>
           </div>
         </section>

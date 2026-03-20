@@ -37,7 +37,8 @@ const Product = () => {
       const [search, setSearch] = useState("");
       const [sortBy, setSortBy] = useState("default");
       const [user, setUser] = useState(null);
-      const [authModal, setAuthModal] = useState(null);
+  const [authModal, setAuthModal] = useState
+    (null);
     const [authForm, setAuthForm] = useState({ name: "", email: "", password: "" });
     const [adminProducts, setAdminProducts] = useState(PRODUCTS);
       const [heroSlide, setHeroSlide] = useState(0);
