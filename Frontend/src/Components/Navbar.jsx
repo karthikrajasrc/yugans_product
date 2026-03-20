@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import logo from "../Images/logo.png"
+import logo from "../Images/Logo.png"
 import { Link, Navigate, Outlet, useNavigate } from "react-router";
 import LoginRegister from "./LoginRegister";
 import instance from "../protectedInstances/axios";
