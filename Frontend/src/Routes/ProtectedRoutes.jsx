@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Authprovider.jsx";
 import { Navigate } from "react-router";
-import toast from "react-hot-toast";
+
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
@@ -12,7 +12,7 @@ const ProtectedRoute = ({ children }) => {
     return <Navigate to="/" replace />; 
   }
 
-  
+
 
 return children;
 };

@@ -7,7 +7,7 @@ import LoggedHome from "./Pages/LoggedHome";
 import LoggedCart from "./Pages/LoggedCart";
 import LoggedOrders from "./Pages/LoggedOrders";
 import LoggedProducts from "./Pages/LoggedProducts";
-import ProtectedRoute from "./Routes/protectedRoutes";
+import ProtectedRoute from "./Routes/ProtectedRoutes.jsx";
 import Admin from "./Pages/Admin";
 import AdminRoute from "./Routes/AdminRoutes";
 import PublicRoute from "./Routes/PublicRoutes";
