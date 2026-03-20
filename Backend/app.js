@@ -6,6 +6,8 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const router = require("./Routers/Payment");
 
+const isProduction = process.env.NODE_ENV === "production";
+
 app.use(cookieParser());
 
 app.use(cors({
