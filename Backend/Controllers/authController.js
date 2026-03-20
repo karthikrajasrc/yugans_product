@@ -59,11 +59,13 @@ const authController = {
 
             const token = await jwt.sign({ id: loggedUser._id }, process.env.JWT_SECRET, { expiresIn: "3h" });
 
-            res.cookie("Token", token, {
-                httpOnly: true,
-                secure: false,
-                sameSite: "Strict"
-            });
+            const isProduction = process.env.NODE_ENV === "production";
+
+           res.cookie("Token", token, {
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "None" : "Lax"
+});
 
             return res.status(200).json({ Message: "Login Successfull!", user: loggedUser});
 
@@ -85,12 +87,13 @@ const authController = {
                 { expiresIn: "3h" }
             );
 
-            res.cookie("Token", token, {
-                httpOnly: true,
-                secure: false,
-                sameSite: "Strict"
-            });
+           const isProduction = process.env.NODE_ENV === "production";
 
+           res.cookie("Token", token, {
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "None" : "Lax"
+});
             return res.status(200).json({
                 Message: "Login Successful!",
                 user: alreadyRegister

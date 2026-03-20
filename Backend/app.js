@@ -9,7 +9,9 @@ const router = require("./Routers/Payment");
 app.use(cookieParser());
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: isProduction
+    ? "https://yugansproduct.netlify.app"
+    : "http://localhost:5173",
   credentials: true
 }));
 

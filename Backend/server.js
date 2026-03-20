@@ -2,13 +2,15 @@ const mongoose = require("mongoose");
 const app = require("./app");
 require("dotenv").config();
 
+const PORT = process.env.PORT || 5000;
+
 
 mongoose
     .connect(process.env.MONGODB_URI)
     .then(() => {
         console.log("Database Connected..")
-        app.listen(4000, "127.0.0.1", () => {
-            console.log("The server is live now.. http://127.0.0.1:4000");
+        app.listen(PORT, () => {
+            console.log(`Server running on http://localhost:${PORT}`);
         })
     })
     .catch((error) => {
