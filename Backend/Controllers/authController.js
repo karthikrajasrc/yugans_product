@@ -62,7 +62,8 @@ const authController = {
             res.cookie("Token", token, {
   httpOnly: true,
   secure: true,
-  sameSite: "None"
+                sameSite: "None",
+  path: "/",
 });
 
             return res.status(200).json({ Message: "Login Successfull!", user: loggedUser});
@@ -86,10 +87,11 @@ const authController = {
             );
 
            res.cookie("Token", token, {
-  httpOnly: true,
-  secure: true,
-  sameSite: "None"
-});
+            httpOnly: true,
+            secure: true,
+               sameSite: "None",
+            path: "/",
+            });
             return res.status(200).json({
                 Message: "Login Successful!",
                 user: alreadyRegister
@@ -114,7 +116,8 @@ const authController = {
         res.cookie("Token", token, {
   httpOnly: true,
   secure: true,
-  sameSite: "None"
+            sameSite: "None",
+  path: "/",
 });
         return res.status(200).json({
             Message: "Account Registered & Login Successful!",
@@ -141,8 +144,13 @@ const authController = {
         }
     }, logout: async (req, res) => {
         try {
-            // clear the cookie from the browser
-            res.clearCookie('Token');
+           
+            res.clearCookie("Token", {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  path: "/",
+});
 
             return res.status(200).json({ message: 'logout successful' });
         } catch (error) {
