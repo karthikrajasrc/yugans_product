@@ -19,6 +19,7 @@ const Navbar = () => {
         try {
             const response = await instance.post("/auth/logout");
             setUser(null);
+            localStorage.removeItem("cart");
             toast.success("Logout Successful ✅");
             navigate("/");
             
