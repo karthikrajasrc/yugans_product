@@ -4,7 +4,7 @@ import instance from "../protectedInstances/axios";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 
 const Admin = () => {
@@ -20,7 +20,24 @@ const [price, setPrice] = useState("");
 const [grams, setGrams] = useState("");
   const [imageFile, setImageFile] = useState(null);
   const [description, setDescription] = useState("");
+  const [updatebtn, setUpdateBtn] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
   
+
+     useEffect(() => {
+      const fetchProducts = async () => {
+        try {
+          const res = await instance.get("/product/all"); 
+          setProducts(res.data.products);
+          console.log("Fetched products:", res.data.products);
+        } catch (err) {
+          console.error("Error fetching products:", err);
+        }
+      };
+  
+      fetchProducts();
+   }, []);
 
   const handleSubmit = async () => {
     try {
@@ -48,6 +65,7 @@ const [grams, setGrams] = useState("");
       setDescription("");
       
       setShowAddProductForm(false)
+      setProducts([...products, data.newProduct]);
   } catch (err) {
     console.error(err);
     toast.error("Failed to add product 😓");
@@ -56,19 +74,79 @@ const [grams, setGrams] = useState("");
   }
   };
   
-   useEffect(() => {
-      const fetchProducts = async () => {
-        try {
-          const res = await instance.get("/product/all"); 
-          setProducts(res.data.products);
-          console.log("Fetched products:", res.data.products);
-        } catch (err) {
-          console.error("Error fetching products:", err);
-        }
-      };
+
   
-      fetchProducts();
-    }, []);
+  
+  const handleDeleteProduct = async (id) => {
+    try {
+      await instance.post(`/product/delete/${id}`);
+      setProducts(products.filter(p => p._id !== id));
+      toast.success("Product deleted successfully");
+    } catch (err) {
+      console.error("Error deleting product:", err);
+      toast.error("Failed to delete product");
+    }
+  };
+
+  const handlecancel = () => {
+    setProductName("");
+    setPrice("");
+    setGrams("");
+    setImageFile(null);
+    setDescription("");
+    setUpdateBtn(false);
+  };
+
+
+  const handleUpdateProduct = async (id) => {
+   setUpdateBtn(true);
+  setShowAddProductForm(true);
+  setSelectedId(id);
+
+  const updateProduct = products.find(f => f._id === id);
+
+  setProductName(updateProduct.productName);
+  setPrice(updateProduct.price);
+  setGrams(updateProduct.grams);
+  setDescription(updateProduct.description);
+
+  setPreviewImage(updateProduct.image); 
+  setImageFile(null);
+  };
+
+  const handleUpdate = async () => {
+    try {
+      setLoading(true);
+
+      const formData = new FormData();
+
+      formData.append("productName", productName);
+      formData.append("price", price);
+      formData.append("description", description);
+      formData.append("grams", grams);
+
+ 
+      if (imageFile) {
+        formData.append("image", imageFile);
+      }
+
+      const res = await instance.put(`/product/update/${selectedId}`, formData);
+
+      toast.success("Product updated 🔥");
+
+      handlecancel();
+      setShowAddProductForm(false);
+      setProducts(products.map(p => 
+  p._id === selectedId ? res.data.updateProduct  : p
+));
+    }
+    catch (err) {
+      console.error("Error updating product:", err);
+      toast.error("Failed to update product");
+    }
+    
+   }
+
 
   return (
       <>
@@ -100,7 +178,7 @@ const [grams, setGrams] = useState("");
                 </div>
           </div>
           {showAddProductForm && (<div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 flex items-center justify-center">
-              <form type="submit" className="max-w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-2xl">
+              <form type="submit" className="w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-2xl">
               <h2 className="text-2xl font-bold mb-6 text-[#1E4A1E]">Add New Product</h2>
               <div className="mb-4">
                   <label className="block text-gray-700 font-bold mb-2" htmlFor="productName">Product Name</label>
@@ -134,20 +212,45 @@ const [grams, setGrams] = useState("");
                  </div>
                   <div className="mb-4">
                       <label className="block text-gray-700 font-bold mb-2" htmlFor="category">Image</label>
-                      <input
+            <div className="flex flex-cols">
+              <input
   type="file"
-  onChange={(e) => setImageFile(e.target.files[0])} alt="preview"
-className="w-full px-3 py-2 border rounded-lg" />
+  onChange={(e) => {
+    setImageFile(e.target.files[0]);
+    setPreviewImage(URL.createObjectURL(e.target.files[0]));
+  }}
+  className="w-50 px-3 py-2 border rounded-lg"
+/>
+            {previewImage && (
+  <img
+    src={previewImage}
+    alt="preview"
+    className="w-15 h-18 object-cover mb-2 rounded"
+  />
+)}
+                      </div>
                   </div>
-          <button
+          {!updatebtn && (<button
   type="button"
   disabled={loading}
   onClick={handleSubmit}
   className="bg-[#1E4A1E] text-white px-4 py-2 rounded-lg"
 >
   {loading ? "Uploading..." : "Add Product"}
-</button>
-              <button type="button" onClick={() => setShowAddProductForm(false)} className="bg-[#1E4A1E] text-white font-bold py-2 px-4 ml-1 rounded-lg hover:bg-[#2D6A2D] transition-colors">Cancel</button> 
+          </button>)}
+
+          {
+            updatebtn && (<button
+  type="button"
+              disabled={loading}
+              onClick={handleUpdate}
+  className="bg-[#1E4A1E] text-white px-4 py-2 rounded-lg"
+>
+  {loading ? "Updating..." : "Update Product"}
+          </button>)
+          }
+          
+          <button type="button" onClick={() => { setShowAddProductForm(false); handlecancel(); }} className="bg-[#1E4A1E] text-white font-bold py-2 px-4 ml-1 rounded-lg hover:bg-[#2D6A2D] transition-colors">Cancel</button> 
               </form>
           </div>)}
           <div className="ml-15 mt-10">
@@ -172,7 +275,7 @@ className="w-full px-3 py-2 border rounded-lg" />
                 <td className="py-2 px-2 text-[18px] font-bold">{p.productName}</td>
                 <td className="py-2 px-2 text-[18px] font-bold">₹{p.price}</td>
                 <td className="py-2 px-2 text-[18px] font-bold">{p.grams}g</td>
-                <td className="py-2 px-2"><button className="bg-red-500 text-white px-3 py-1 rounded-lg hover:bg-red-600 transition-colors"><FontAwesomeIcon icon={faTrash} /></button></td>
+                  <td className="py-2 px-1 text-center"><button onClick={() => handleUpdateProduct(p._id)} className="text-[24px] mr-3"><FontAwesomeIcon icon={faEdit} /></button><button onClick={() => handleDeleteProduct(p._id)} className="bg-red-500 text-white px-2 py-1 rounded-lg ml-2 hover:bg-red-600 transition-colors"><FontAwesomeIcon icon={faTrash} /></button></td>
               </tr>
             ))}
           </tbody>

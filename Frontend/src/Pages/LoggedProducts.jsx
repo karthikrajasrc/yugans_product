@@ -101,7 +101,7 @@ const handleCart = (id) => {
                               <p className="text-sm text-gray-600 mt-1">{p.description}</p>
                         <div className="mt-3 flex items-center justify-between">
                           <div>
-                            <span className="text-xl font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="text-[15px] text-red-400 font-bold ml-2 line-through">₹{Math.round(p.price + p.price * 25 / 100)}</span>
+                            <span className="text-xl font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="text-[15px] text-red-400 font-bold ml-2 line-through">₹{Math.round(Number(p.price) + Number(p.price) * 25 / 100)}</span>
                             </div>
                           <button
   onClick={() => handleCart(p._id)}

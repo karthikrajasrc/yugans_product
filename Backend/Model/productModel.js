@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 const productSchema = new mongoose.Schema({
     productName: String,
-    price: Number,
+    price: String,
     description: String,
     image: String,
-    grams: Number,
+    grams: String,
 })
 
 module.exports = mongoose.model("Product", productSchema, "Products");
