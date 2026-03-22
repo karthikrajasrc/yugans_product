@@ -10,7 +10,9 @@ const LoggedCart = () => {
   const [products, setProducts] = useState([]);
   const [quantity, setQuantity] = useState({});
 
-  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const [cartItems, setCartItems] = useState(
+  JSON.parse(localStorage.getItem("cart")) || []
+);
 
 
     const hanldecheckout = async () => { 
@@ -71,21 +73,38 @@ const order = res.data;
   const fillerProducts = products.filter(p => cartItems.includes(p._id));
 
   const handleincrease = (id) => {
-    setQuantity(prev => ({ ...prev, [id]: (prev[id] || 1) + 1 }));
+  const currentQty = quantity[id] || 1;
+
+  setQuantity(prev => ({
+    ...prev,
+    [id]: currentQty + 1
+  }));
+};
+
+ const handledecrease = (id) => {
+  const currentQty = quantity[id] || 1;
+
+  if (currentQty <= 1) {
+    const updatedCart = cartItems.filter(item => item !== id);
+
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+    setCartItems(updatedCart);
+
+    setQuantity(prev => {
+      const newQty = { ...prev };
+      delete newQty[id]; 
+      return newQty;
+    });
+
+    toast.error("Removed from Cart ❌");
+    return;
   }
 
-  const handledecrease = (id) => {
-    if (quantity[id] <= 1) {
-      const updatedCart = cartItems.filter(item => item !== id);
-
-      setQuantity(prev => ({ ...prev, [id]: 1 }));
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      toast.error("Removed from Cart ❌");
-      return;
-    }
-      setQuantity(prev => ({ ...prev, [id]: prev[id] - 1 }));
-
-  }
+  setQuantity(prev => ({
+    ...prev,
+    [id]: currentQty - 1
+  }));
+};
 
   const total = fillerProducts.reduce((sum, p) => sum + p.price * (quantity[p._id] || 1), 0);
     
