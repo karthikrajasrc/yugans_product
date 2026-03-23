@@ -12,7 +12,7 @@ app.use(cookieParser());
 
 app.use(cors({
   origin: ["https://yugansproduct.in", "https://www.yugansproduct.in"],
-  withCredentials: true
+  credentials: true
 }));
 
 app.use("/api/payment", router);
