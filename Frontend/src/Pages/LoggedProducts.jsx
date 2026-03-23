@@ -88,31 +88,33 @@ const handleCart = (id) => {
                 </div>
       </div>
       <div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="max-w-7xl mx-auto md:px-4 px-1 sm:px-6 lg:px-8 py-6 sm:py-10">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-2">
                   {filteredProducts.map(p => (
                       <div key={p._id} className="bg-white rounded-lg shadow-md overflow-hidden relative">
-                      <img src={p.image} alt={p.productName} className="w-full h-85 object-cover" />
+                      <img src={p.image} alt={p.productName} className="w-full h-50 md:h-85 object-cover" />
                       <div className="absolute top-3 right-3 bg-[#ffffff] text-[#2D6A2D] text-xs font-extrabold px-2 py-1 rounded-md shadow-md">
           {p.grams}g
       </div>
-                          <div className="p-4">
-                              <h3 className="text-lg font-bold text-[#1E4A1E]">{p.productName}</h3>
-                              <p className="text-sm text-gray-600 mt-1">{p.description}</p>
-                        <div className="mt-3 flex items-center justify-between">
+                          <div className="md:p-4 p-1 text-center">
+                              <h3 className="md:text-lg text-sm font-bold text-[#1E4A1E]">{p.productName}</h3>
+                              <p className="md:text-sm text-[13px] text-gray-600 mt-1">{p.description}</p>
+                        <div className="mt-3 flex flex-col items-center justify-end">
                           <div>
-                            <span className="text-xl font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="text-[15px] text-red-400 font-bold ml-2 line-through">₹{Math.round(Number(p.price) + Number(p.price) * 25 / 100)}</span>
-                            </div>
+                            <span className="text-xl font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="md:text-[15px] text-[13px] text-red-300 font-bold ml-2 line-through">₹{Math.round(Number(p.price) + Number(p.price) * 25 / 100)}</span>
+                          </div>
+                          <div>
                           <button
   onClick={() => handleCart(p._id)}
-  className={`px-4 py-2 rounded-lg text-sm transition-colors
+  className={`md:px-4 md:py-2 px-1 py-0.5 mt-1 mb-2 md:rounded-lg rounded-sm md:text-sm text-[13px] transition-colors
     ${cartItems.includes(p._id)
       ? "bg-red-500 hover:bg-red-600 text-white font-bold"
       : "bg-[#8DC21F] hover:bg-[#6abf6a] text-white font-bold"
     }`}
 >
   {cartItems.includes(p._id) ? "Remove" : "Add to Cart"}
-</button>
+                            </button>
+                            </div>
                         </div>
                       </div> 
                   

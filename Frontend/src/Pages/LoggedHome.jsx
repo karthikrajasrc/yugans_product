@@ -8,36 +8,6 @@ import { AuthContext } from "../../Authprovider.jsx";
 import Spinner from "../Components/Spinner.jsx";
 
 
-
-const PRODUCTS = [
-  { id: 1, name: "7-Grain Multigrain Flour", price: 199, originalPrice: 249, category: "multigrain", rating: 4.8, reviews: 234, badge: "Best Seller", weight: "1kg", featured: true, benefits: ["High Fiber", "Protein Rich", "No Preservatives"], img: "https://images.unsplash.com/photo-1574323347407-f5e1ad6d020b?w=400&q=80", desc: "Premium blend of 7 wholesome grains – wheat, oats, barley, ragi, jowar, bajra & corn. Rich in fiber and essential nutrients." },
-  { id: 2, name: "Kitchen King Masala", price: 149, originalPrice: 185, category: "masala", rating: 4.9, reviews: 456, badge: "Top Rated", weight: "200g", featured: true, benefits: ["21 Spices", "Authentic Recipe", "No Artificial Color"], img: "https://images.unsplash.com/photo-1596040033229-a9821ebd058d?w=400&q=80", desc: "Authentic blend of 21 aromatic spices – the king of all masalas for rich, flavorful curries." },
-  { id: 3, name: "Ragi Millet Flour", price: 129, originalPrice: 160, category: "multigrain", rating: 4.7, reviews: 189, badge: "Organic", weight: "500g", featured: true, benefits: ["Calcium Rich", "Gluten Free", "Diabetic Friendly"], img: "https://images.unsplash.com/photo-1586201375761-83865001e31c?w=400&q=80", desc: "Stone-ground finger millet flour packed with calcium and iron. Perfect for rotis and dosas." },
-  { id: 4, name: "Garam Masala Premium", price: 129, originalPrice: 165, category: "masala", rating: 4.8, reviews: 312, badge: "Premium", weight: "100g", featured: false, benefits: ["Slow Roasted", "Whole Spices", "Preservative Free"], img: "https://images.unsplash.com/photo-1532336414038-cf19250c5757?w=400&q=80", desc: "Whole-spice blend slow roasted to perfection. The secret ingredient every Indian kitchen needs." },
-  { id: 5, name: "Jowar Sorghum Flour", price: 89, originalPrice: 120, category: "multigrain", rating: 4.5, reviews: 98, badge: "", weight: "500g", featured: false, benefits: ["Gluten Free", "High Protein", "Heart Healthy"], img: "https://images.unsplash.com/photo-1551462147-ff29053bfc14?w=400&q=80", desc: "Gluten-free jowar flour for nutritious bhakri, rotis and porridges. A staple grain of Maharashtra." },
-  { id: 6, name: "Chaat Masala Blend", price: 99, originalPrice: 125, category: "masala", rating: 4.6, reviews: 221, badge: "Fan Favorite", weight: "100g", featured: false, benefits: ["Tangy Flavor", "Natural Ingredients", "Versatile Use"], img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&q=80", desc: "Tangy, spicy, and absolutely addictive! Our signature chaat masala elevates everything." },
-  { id: 7, name: "Flax & Chia Seed Mix", price: 249, originalPrice: 299, category: "seeds", rating: 4.9, reviews: 167, badge: "Superfood", weight: "250g", featured: true, benefits: ["Omega-3 Rich", "Antioxidants", "Boosts Immunity"], img: "https://images.unsplash.com/photo-1510682693398-edd5ff714916?w=400&q=80", desc: "Superfood seed blend of flaxseeds and chia seeds. Add to smoothies for an omega-3 boost." },
-  { id: 8, name: "Sambar Masala", price: 119, originalPrice: 149, category: "masala", rating: 4.7, reviews: 278, badge: "South Indian", weight: "200g", featured: false, benefits: ["Authentic Recipe", "No MSG", "Rich Aroma"], img: "https://images.unsplash.com/photo-1604329760661-e71dc83f8f26?w=400&q=80", desc: "South Indian style sambar powder with the perfect balance of lentils, tamarind spices and aromatic herbs." },
-  { id: 9, name: "Bajra Pearl Millet", price: 79, originalPrice: 99, category: "multigrain", rating: 4.4, reviews: 76, badge: "", weight: "500g", featured: false, benefits: ["Iron Rich", "Energy Boost", "Cooling Effect"], img: "https://images.unsplash.com/photo-1569596082827-c5e2655e95f1?w=400&q=80", desc: "Traditional bajra flour rich in iron and magnesium. Perfect for winter rotis and porridges." },
-  { id: 10, name: "Coriander Cumin Powder", price: 89, originalPrice: 110, category: "spices", rating: 4.6, reviews: 143, badge: "Daily Essential", weight: "200g", featured: false, benefits: ["Digestive Aid", "Fresh Ground", "Pure Blend"], img: "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=400&q=80", desc: "Classic dhania-jeera powder, freshly ground from premium whole seeds. A kitchen staple." },
-  { id: 11, name: "Sunflower Pumpkin Seeds", price: 199, originalPrice: 249, category: "seeds", rating: 4.7, reviews: 112, badge: "New", weight: "200g", featured: false, benefits: ["Zinc Rich", "Heart Healthy", "Crunchy Snack"], img: "https://images.unsplash.com/photo-1615485290382-441e4d049cb5?w=400&q=80", desc: "Roasted blend of sunflower and pumpkin seeds. A nutritious snack or salad topper." },
-  { id: 12, name: "Rajwadi Garam Masala", price: 159, originalPrice: 199, category: "masala", rating: 4.8, reviews: 201, badge: "Royal Blend", weight: "100g", featured: false, benefits: ["Rajasthani Recipe", "Aromatic", "Bold Flavor"], img: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=400&q=80", desc: "Traditional Rajasthani garam masala with bold, regal flavors. Elevate your curries instantly." },
-];
-
-const CATEGORIES = ["all", "multigrain", "masala", "seeds", "spices"];
-const CAT_LABELS = { all: "🌿 All", multigrain: "🌾 Multigrain", masala: "🌶️ Masala", seeds: "🌱 Seeds", spices: "🫙 Spices" };
-const CAT_COLORS = { multigrain: "bg-amber-100 text-amber-700", masala: "bg-red-100 text-red-700", seeds: "bg-emerald-100 text-emerald-700", spices: "bg-orange-100 text-orange-700", flours: "bg-yellow-100 text-yellow-700" };
-
-const Stars = ({ rating }) => (
-  <div className="flex items-center gap-1">
-    {[1,2,3,4,5].map(i => (
-      <span key={i} className={`text-sm ${i <= Math.floor(rating) ? "text-amber-400" : "text-gray-300"}`}>★</span>
-    ))}
-    <span className="text-xs text-gray-400 font-semibold ml-1">{rating}</span>
-  </div>
-);
-
-
 const LoggedHome = () => {
 
       const [page, setPage] = useState("home");

@@ -70,27 +70,28 @@ const handleCart = () => {
                 </div>
       </div>
       <div>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+          <div className="max-w-7xl mx-auto md:px-4 px-1 sm:px-6 lg:px-8 py-6 sm:py-10">
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-2">
                   {filteredProducts.map(p => (
                       <div key={p._id} className="bg-white rounded-lg shadow-md overflow-hidden relative">
-                      <img src={p.image} alt={p.productName} className="w-full h-85 object-cover" />
+                      <img src={p.image} alt={p.productName} className="w-full md:h-85 h-50 object-cover" />
                       <div className="absolute top-3 right-3 bg-[#ffffff] text-[#2D6A2D] text-xs font-extrabold px-2 py-1 rounded-md shadow-md">
           {p.grams}g
       </div>
                           <div className="p-4">
-                              <h3 className="text-lg font-bold text-[#1E4A1E]">{p.productName}</h3>
-                              <p className="text-sm text-gray-600 mt-1">{p.description}</p>
+                              <h3 className="md:text-lg text-sm font-bold text-[#1E4A1E]">{p.productName}</h3>
+                              <p className="md:text-sm text-[12px] text-gray-600 mt-1">{p.description}</p>
                         <div className="mt-3 flex items-center justify-between">
                           <div>
-                            <span className="text-xl font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="text-[15px] text-red-400 font-bold ml-2 line-through">₹{Math.round(Number(p.price) + Number(p.price) * 25 / 100)}</span>
-                            </div>
-                          <button
+                            <span className="md:text-xl text-sm font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="text-[15px] text-red-400 font-bold ml-2 line-through">₹{Math.round(Number(p.price) + Number(p.price) * 25 / 100)}</span>
+                            <button
                             onClick={handleCart}
-                            className="bg-[#8DC21F] hover:bg-[#6abf6a] text-white font-bold px-4 py-2 rounded-lg text-sm"
+                            className="bg-[#8DC21F] hover:bg-[#6abf6a] text-white font-bold md:px-4 md:py-2 px-2 py-0.5 rounded-sm text-sm"
 >
   Add Cart
 </button>
+                            </div>
+                          
                         </div>
                       </div> 
                   

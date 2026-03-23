@@ -111,87 +111,103 @@ const order = res.data;
   return (
     <>
       {cartItems.length === 0 ? (<div className="flex justify-center text-center h-80 items-center">
-        <h1 className="text-4xl font-bold text-[#1E4A1E]">Your cart is Empty!!</h1>
+        <h1 className="md:text-4xl text-xl font-bold text-[#1E4A1E]">Your cart is Empty!!</h1>
         </div>) : (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <h1 className="text-3xl font-bold text-[#1E4A1E] mb-6">Your Cart</h1>
-            <div className="bg-white shadow-md rounded-lg p-6">
+            <h1 className="md:text-3xl text-2xl font-bold text-[#1E4A1E] mb-6">Your Cart</h1>
+            <div className="bg-white shadow-md rounded-lg md:p-6 p-2">
               <div>
-                <h2 className="text-2xl font-bold text-[#1E4A1E] mb-6 border-b-gray-300 border-b pb-2">Delivery Address</h2>
+                <h2 className="md:text-2xl text-xl font-bold text-[#1E4A1E] mb-6 border-b-gray-300 border-b pb-2">Delivery Address</h2>
                 <div className="flex gap-1 flex-wrap justify-center">
-                <div className="mx-4">
+                <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">Name</label>
-                  <input type="text" placeholder="Enter your Name" className="w-50 border border-gray-300 rounded-md p-2 mb-4" />
+                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
                 </div>
-                <div className="mx-4">
+                <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">Door Number</label>
-                  <input type="text" placeholder="Enter your Door Number" className="w-50 border border-gray-300 rounded-md p-2 mb-4" />
+                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
                   </div>
-                  <div className="mx-4">
+                  <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">Street 1</label>
-                  <input type="text" placeholder="Enter your street" className="w-50 border border-gray-300 rounded-md p-2 mb-4" />
+                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
                 </div>
-                <div>
+                <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">Street 2</label>
-                  <input type="text" placeholder="Enter your street" className="w-50 border border-gray-300 rounded-md p-2 mb-4" />
+                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
                   </div>
-                  <div className="mx-4">
+                  <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">City</label>
-                  <input type="text" placeholder="Enter your city" className="w-50 border border-gray-300 rounded-md p-2 mb-4" />
+                  <input type="text"  className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
                   </div>
-                  <div className="mx-4">
+                  <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">District</label>
-                  <input type="text" placeholder="Enter your district" className="w-50 border border-gray-300 rounded-md p-2 mb-4" />
+                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
                   </div>
-                   <div className="mx-4">
+                   <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">State</label>
-                  <input type="text" placeholder="Enter your state" className="w-50 border border-gray-300 rounded-md p-2 mb-4" />
+                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
                   </div>
-                  <div className="mx-4">
+                  <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">Phone Number</label>
-                  <input type="text" placeholder="Enter your phone number" className="w-50 border border-gray-300 rounded-md p-2 mb-4" />
+                  <input type="number" className="md:w-50 w-30 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
                   </div>
                   
 </div>
               </div>
             </div>
-            <div className="bg-white shadow-md rounded-lg p-6 mt-10">
+            <div className="bg-white shadow-md rounded-lg md:p-6 p-2 mt-10">
               <div>
-                <h2 className="text-2xl font-bold text-[#1E4A1E] mb-6 border-b-gray-300 border-b pb-2">Your Cart</h2>
+                <h2 className="md:text-2xl text-xl font-bold text-[#1E4A1E] mb-6 border-b-gray-300 border-b pb-2">Your Cart</h2>
               </div>
                 {fillerProducts.map((f) => (
                   <div key={f._id} className="flex items-center justify-between mb-4 border border-gray-300 p-2 rounded-lg">
                     <div className="flex items-center gap-4">
                       <img src={f.image} alt={f.name} className="w-16 h-16 object-cover" />
                       <div>
-                        <h2 className="text-lg font-semibold text-[#2D6A2D]">{f.productName}</h2>
-                        <p className="text-gray-500 text-sm">Quantity: {quantity[f._id] || 1}</p>
-                        <p className="text-gray-500 text-sm font-bold">Weight: { f.grams} Grams </p>
+                        <h2 className="md:text-lg text-md font-semibold text-[#2D6A2D]">{f.productName}</h2>
+                        <p className="text-gray-500 md:text-sm text-[12px]">Quantity: {quantity[f._id] || 1}</p>
+                        <p className="text-gray-500 md:text-sm text-[13px] font-bold">Weight: { f.grams} Grams </p>
                       </div>
                     </div>
-                    <div className="flex gap-15  items-center">
-                      <div className="flex items-center gap-4">
-                        <button onClick={() => handledecrease(f._id)} className="border border-gray-300 px-2 rounded-sm text-[20px] bg-[#d09f3c] text-white">-</button>
-                        <span className="mx-2 font-extrabold text-[18px]">{quantity[f._id] || 1}</span>
-                        <button onClick={() => handleincrease(f._id)} className="border border-gray-300 px-2 rounded-sm text-[20px] bg-[#d09f3c] text-white">+</button>
+                    <div className="flex md:gap-15 md:flex-row flex-col-reverse gap-1 items-center">
+                      <div className="flex items-center md:gap-4 gap-1">
+                        <button onClick={() => handledecrease(f._id)} className="border border-gray-300 md:px-2 px-1 rounded-sm md:text-[20px] text-[17px] bg-[#d09f3c] text-white">-</button>
+                        <span className="mx-2 font-extrabold md:text-[18px] text-[16px]">{quantity[f._id] || 1}</span>
+                        <button onClick={() => handleincrease(f._id)} className="border border-gray-300 md:px-2 px-1 rounded-sm md:text-[20px] text-[17px] bg-[#d09f3c] text-white">+</button>
                       </div>
                       
-                      <span className="text-xl font-bold text-[#2D6A2D] mr-2">₹{f.price * (quantity[f._id] || 1)}</span>
+                      <div>
+                        <span className="md:text-xl text-md font-bold text-[#2D6A2D] mr-2">₹{f.price * (quantity[f._id] || 1)}</span>
+                      </div>
                     </div>
                   </div>
                 ))}
-              <div className="flex justify-evenly mr-2 mt-10">
-                <div className="flex justify-center items-center gap-2">
+              <div className="flex justify-center md:justify-evenly items-center flex-col mr-2 gap-4 md:mt-10">
+                <div className="flex justify-center flex-row items-center gap-2">
                   <label className="block text-[15px] text-gray-700 mb-1 font-bold">Coupon:</label>
-                <input type="text" placeholder="Enter coupon code" className="w-50 border border-gray-300 rounded-md px-2 py-1" />
+                  <input type="text" placeholder="Enter coupon code" className="md:w-50 md:text-[14px] w-35 border border-gray-300 text-[12px] rounded-md px-2 py-1" />
+                  <button className="border-gray-200 border rounded-lg font-bold bg-[#8DC21F] text-white md:py-1 py-0.5 px-1.5">Apply</button>
                 </div>
-                <h2 className="text-xl font-bold text-black">Total Amount: <span className="text-[29px] ml-3 text-[#2D6A2D] font-extrabold">₹{total}</span></h2>
+                <div className="flex flex-col border border-gray-300 md:px-10 px-10 rounded-2xl">
+                  <div className="flex justify-start gap-2 mt-2">
+                  <h2 className="md:text-[18px] text-md font-bold text-black">SubTotal: <span className="md:text-[20px] text-[20px] md:ml-81 ml-25 text-[#2D6A2D] font-semibold">₹ {total}</span></h2>
+                </div>
+                <div className="flex justify-start gap-2">
+                  <h2 className="md:text-[18px] text-md font-bold text-black">Delivery Charges: <span className="md:text-[20px] text-[20px] md:ml-66 ml-12 text-[#2D6A2D] font-semibold">₹ 70</span></h2>
+                </div>
+                <div className="flex justify-start items-center gap-2 border-b border-b-gray-400 pb-2">
+                  <h2 className="md:text-[18px] text-md font-bold text-black">Discount: <span className="md:text-[20px] text-[20px] md:ml-83 ml-27 text-[#2D6A2D] font-bold">₹ {total * 25 / 100}</span></h2>
+                </div> 
+                <div className="flex justify-start items-center gap-2 mt-4 md:mt-0 pb-4">
+                  <h2 className="md:text-xl text-md font-bold text-black">Total Amount: <span className="md:text-[29px] text-[22px] md:ml-65 ml-15 text-[#2D6A2D] font-extrabold">₹ {total + 70}</span></h2>
+                </div>
+                </div>
               </div>
               <div className="flex justify-center mt-4">
-                <button onClick={hanldecheckout} className="border-gray-200 border rounded-lg font-bold bg-[#8DC21F] text-white py-1 px-1.5 ml-15">Checkout</button>
+                <button onClick={hanldecheckout} className="border-gray-200 border rounded-lg font-bold bg-[#8DC21F] text-white py-1 px-1.5">Checkout</button>
               </div>
             </div>
-            </div>
+          </div>
       )}    
               
                

@@ -59,7 +59,7 @@ const Navbar = () => {
                         </div>)}
                         { user && (
                             <div className="flex items-center gap-2">
-                                <span className="text-white font-bold text-2xl">Welcome, {user.Name}!</span>
+                                <span className="text-white font-bold md:text-2xl text-lg">Welcome, {user.Name}!</span>
                             </div>
                         )}
 

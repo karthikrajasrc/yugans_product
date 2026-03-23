@@ -30,7 +30,6 @@ const [grams, setGrams] = useState("");
         try {
           const res = await instance.get("/product/all"); 
           setProducts(res.data.products);
-          console.log("Fetched products:", res.data.products);
         } catch (err) {
           console.error("Error fetching products:", err);
         }
@@ -153,64 +152,64 @@ const [grams, setGrams] = useState("");
           <div className="bg-[#1E4A1E] py-12 sm:py-16 relative overflow-hidden flex justify-evenly">
                 <div className="z-10">
                     <span className="text-[#8DC21F] font-extrabold text-xs uppercase tracking-widest">Welcome Back!</span>
-                    <h1 className="font-black text-white text-4xl sm:text-5xl mt-2">Hello <span className="text-[#8DC21F]">Admin</span></h1>
+                    <h1 className="font-black text-white md:text-4xl text-2xl sm:text-5xl mt-2">Hello <span className="text-[#8DC21F]">Admin</span></h1>
                     <p className="text-gray-300 text-sm mt-2 ">Mealtime in a Minute!</p>
               </div>
               <div>
-                    <h2 className="font-black text-3xl text-center mt-10 mb-6  text-white">Admin Dashboard</h2>
+                    <h2 className="font-black md:text-3xl text-md text-center mt-10 mb-6  text-white">Admin Dashboard</h2>
               </div>
           </div>
           <div>
               
-              <div className="flex flex-wrap justify-center gap-6 mt-10">
+              <div className="flex flex-wrap justify-center md:gap-6 gap-2 md:mt-10 mt-5">
                   <div>
-                      <button onClick={() => setShowAddProductForm(true)} className="bg-[#ffffff] text-black px-10 py-15 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors text-xl font-bold">Add Product +</button>
+                      <button onClick={() => setShowAddProductForm(true)} className="bg-[#ffffff] text-black md:px-10 md:py-15 px-6 py-8 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors md:text-xl text-md font-bold">Add Product +</button>
                   </div>
                   <div>
-                      <button className="bg-[#ffffff] text-black font-extrabold px-10 py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Total Orders <p className="font-black text-[#2D6A2D] pt-2 text-2xl sm:text-3xl">{ ordercount}</p></button>
+                      <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Total Orders <p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">{ ordercount}</p></button>
                   </div>
                   <div>
-                      <button className="bg-[#ffffff] text-black font-extrabold px-10 py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Total Revenue <p className="font-black text-[#2D6A2D] pt-2 text-2xl sm:text-3xl">₹ { totalRevenue}</p></button> 
+                      <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Total Revenue <p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">₹ { totalRevenue}</p></button> 
                   </div>
                   <div>
-            <button className="bg-[#ffffff] text-black font-extrabold px-10 py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Products<p className="font-black text-[#2D6A2D] pt-2 text-2xl sm:text-3xl">{ products.length }</p></button>
+            <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Products<p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">{ products.length }</p></button>
                   </div>
                 </div>
           </div>
           {showAddProductForm && (<div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 flex items-center justify-center">
-              <form type="submit" className="w-2xl mx-auto mt-10 p-6 bg-white rounded-lg shadow-md z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-2xl">
-              <h2 className="text-2xl font-bold mb-6 text-[#1E4A1E]">Add New Product</h2>
-              <div className="mb-4">
+              <form type="submit" className="md:w-2xl w-80 mx-auto mt-10 p-6 bg-white rounded-lg shadow-md z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-2xl">
+              <h2 className="md:text-2xl text-xl font-bold md:mb-6 mb-2 text-[#1E4A1E]">Add New Product</h2>
+              <div className="md:mb-4 mb-1">
                   <label className="block text-gray-700 font-bold mb-2" htmlFor="productName">Product Name</label>
                   <input
           type="text"
           value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-          className="w-full px-3 py-2 border rounded-lg"
+                onChange={(e) => setProductName(e.target.value)}
+                className="w-full md:px-3 px-1 md:py-2 py-1 text-[14px] border rounded-lg"
           placeholder="Enter product name"
           />
               </div>
-              <div className="mb-4">
+              <div className="md:mb-4 mb-1">
                   <label className="block text-gray-700 font-bold mb-2" htmlFor="price">Price</label>
                   <input
   type="number"
   value={price}
   onChange={(e) => setPrice(e.target.value)}
-  className="w-full px-3 py-2 border rounded-lg"
+  className="w-full md:px-3 px-1 md:py-2 py-1 text-[14px] border rounded-lg"
 />
           </div>
-          <div>
+          <div className="md:mb-4 mb-1">
               <label className="block text-gray-700 font-bold mb-2" htmlFor="description">Description</label>
               <textarea
   value={description}
   onChange={(e) => setDescription(e.target.value)}
-  className="w-full px-3 py-2 border rounded-lg" />
+  className="w-full md:px-3 px-1 md:py-2 py-1 text-[14px] border rounded-lg" />
           </div>
-          <div>
+          <div className="md:mb-4 mb-1">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="grams">Grams</label>
-            <input type="number" value={grams} onChange={(e) => setGrams(e.target.value)} className="w-full px-3 py-2 border rounded-lg" />
+            <input type="number" value={grams} onChange={(e) => setGrams(e.target.value)} className="w-full md:px-3 px-1 md:py-2 py-1 text-[14px] border rounded-lg" />
                  </div>
-                  <div className="mb-4">
+                  <div className="md:mb-4 mb-1">
                       <label className="block text-gray-700 font-bold mb-2" htmlFor="category">Image</label>
             <div className="flex flex-cols">
               <input
@@ -219,7 +218,7 @@ const [grams, setGrams] = useState("");
     setImageFile(e.target.files[0]);
     setPreviewImage(URL.createObjectURL(e.target.files[0]));
   }}
-  className="w-50 px-3 py-2 border rounded-lg"
+  className="w-50 md:px-3 px-1 text-[13px] md:py-2 py-1 border rounded-lg"
 />
             {previewImage && (
   <img
@@ -234,7 +233,7 @@ const [grams, setGrams] = useState("");
   type="button"
   disabled={loading}
   onClick={handleSubmit}
-  className="bg-[#1E4A1E] text-white px-4 py-2 rounded-lg"
+  className="bg-[#1E4A1E] text-white md:px-4 md:py-2 mt-2 px-2 py-1 rounded-lg"
 >
   {loading ? "Uploading..." : "Add Product"}
           </button>)}
@@ -244,22 +243,22 @@ const [grams, setGrams] = useState("");
   type="button"
               disabled={loading}
               onClick={handleUpdate}
-  className="bg-[#1E4A1E] text-white px-4 py-2 rounded-lg"
+  className="bg-[#1E4A1E] text-white md:px-4 md:py-2 px-2 py-1 rounded-lg"
 >
   {loading ? "Updating..." : "Update Product"}
           </button>)
           }
           
-          <button type="button" onClick={() => { setShowAddProductForm(false); handlecancel(); }} className="bg-[#1E4A1E] text-white font-bold py-2 px-4 ml-1 rounded-lg hover:bg-[#2D6A2D] transition-colors">Cancel</button> 
+          <button type="button" onClick={() => { setShowAddProductForm(false); handlecancel(); }} className="bg-[#1E4A1E] text-white font-bold md:px-4 md:py-2 px-2 py-1 ml-1 rounded-lg hover:bg-[#2D6A2D] transition-colors">Cancel</button> 
               </form>
           </div>)}
-          <div className="ml-15 mt-10">
-              <h2 className="text-3xl mt-10 mb-6 font-black text-[#2D6A2D]">Products</h2>
+          <div className="md:ml-15 ml-8 md:mt-10 mt-6">
+              <h2 className="md:text-3xl text-2xl mt-10 mb-6 font-black text-[#2D6A2D]">Products</h2>
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
+      <div className="md:max-w-7xl mx-auto md:px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
         <table className="bg-white md:w-300 text-center w-full rounded-3xl">
-          <thead className="bg-[#1E4A1E] text-white rounded-3xl">
+          <thead className="bg-[#1E4A1E] text-white text-[12px] md:text-xl rounded-3xl">
             <tr>
               <th className="w-10 h-10 py-2 px-2">Product</th>
               <th className="py-2 px-2">Product Name</th>
@@ -270,12 +269,12 @@ const [grams, setGrams] = useState("");
           </thead>
           <tbody>
             {products.map(p => (
-              <tr key={p._id} className="border-t border-gray-300">
-                <td className="py-2 px-2"><img src={p.image} alt={p.productName} className="w-full h-full" /></td>
-                <td className="py-2 px-2 text-[18px] font-bold">{p.productName}</td>
-                <td className="py-2 px-2 text-[18px] font-bold">₹{p.price}</td>
-                <td className="py-2 px-2 text-[18px] font-bold">{p.grams}g</td>
-                  <td className="py-2 px-1 text-center"><button onClick={() => handleUpdateProduct(p._id)} className="text-[24px] mr-3"><FontAwesomeIcon icon={faEdit} /></button><button onClick={() => handleDeleteProduct(p._id)} className="bg-red-500 text-white px-2 py-1 rounded-lg ml-2 hover:bg-red-600 transition-colors"><FontAwesomeIcon icon={faTrash} /></button></td>
+              <tr key={p._id} className="border-t border-gray-300 text-[14px] md:text-[18px]">
+                <td className="py-2 md:px-2"><img src={p.image} alt={p.productName} className="w-full h-full" /></td>
+                <td className="py-2 md:px-2 md:text-[18px] font-bold">{p.productName}</td>
+                <td className="py-2 md:px-2 md:text-[18px] font-bold">₹{p.price}</td>
+                <td className="py-2 md:px-2 md:text-[18px] font-bold">{p.grams}g</td>
+                  <td className="py-2 px-1 text-center"><button onClick={() => handleUpdateProduct(p._id)} className="md:text-[24px] text-[18px] md:mr-3 mr-2"><FontAwesomeIcon icon={faEdit} /></button><button onClick={() => handleDeleteProduct(p._id)} className="bg-red-500 text-white md:text-[18px] text-[11px] px-2 py-1 rounded-lg md:ml-2 hover:bg-red-600 transition-colors"><FontAwesomeIcon icon={faTrash} /></button></td>
               </tr>
             ))}
           </tbody>
