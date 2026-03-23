@@ -59,11 +59,15 @@ const authController = {
 
             const token = await jwt.sign({ id: loggedUser._id }, process.env.JWT_SECRET, { expiresIn: "3h" });
 
+            const isProduction = process.env.NODE_ENV === "production";
+
             res.cookie("Token", token, {
   httpOnly: true,
-  secure: true,
-                sameSite: "None",
+  secure: isProduction,
+  sameSite: isProduction ? "None" : "Lax",
   path: "/",
+  domain: isProduction ? ".yugansproduct.in" : undefined,
+  maxAge: 3 * 60 * 60 * 1000
 });
 
             return res.status(200).json({ Message: "Login Successfull!", user: loggedUser});
@@ -86,12 +90,18 @@ const authController = {
                 { expiresIn: "3h" }
             );
 
-           res.cookie("Token", token, {
-            httpOnly: true,
-            secure: true,
-               sameSite: "None",
-            path: "/",
+           const isProduction = process.env.NODE_ENV === "production";
+
+            res.cookie("Token", token, {
+  httpOnly: true,
+  secure: isProduction,
+  sameSite: isProduction ? "None" : "Lax",
+  path: "/",
+  domain: isProduction ? ".yugansproduct.in" : undefined,
+  maxAge: 3 * 60 * 60 * 1000
             });
+            
+
             return res.status(200).json({
                 Message: "Login Successful!",
                 user: alreadyRegister
@@ -113,11 +123,15 @@ const authController = {
             { expiresIn: "3h" }
         );
 
-        res.cookie("Token", token, {
+         const isProduction = process.env.NODE_ENV === "production";
+
+            res.cookie("Token", token, {
   httpOnly: true,
-  secure: true,
-            sameSite: "None",
+  secure: isProduction,
+  sameSite: isProduction ? "None" : "Lax",
   path: "/",
+  domain: isProduction ? ".yugansproduct.in" : undefined,
+  maxAge: 3 * 60 * 60 * 1000
 });
         return res.status(200).json({
             Message: "Account Registered & Login Successful!",
@@ -145,11 +159,12 @@ const authController = {
     }, logout: async (req, res) => {
         try {
            
-            res.clearCookie("Token", {
+         res.clearCookie("Token", {
   httpOnly: true,
-  secure: true,
-  sameSite: "none",
+  secure: isProduction,
+  sameSite: isProduction ? "None" : "Lax",
   path: "/",
+  domain: isProduction ? ".yugansproduct.in" : undefined
 });
 
             return res.status(200).json({ message: 'logout successful' });
