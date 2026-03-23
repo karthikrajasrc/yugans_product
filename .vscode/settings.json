@@ -1,0 +1,10 @@
+{
+    "github.copilot.enable": {
+        "html": true,
+        "scminput": true,
+        "markdown": true,
+        "plaintext": true,
+        "javascript": true,
+        "javascriptreact": true
+    }
+}

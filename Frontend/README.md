@@ -1,16 +1,39 @@
-# React + Vite
+# 🛒 YugansProduct – MERN Stack eCommerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+YugansProduct is a full-stack eCommerce web application built using the MERN stack. It provides a seamless online shopping experience with secure authentication, product browsing, and order management.
 
-Currently, two official plugins are available:
+## 🚀 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🌐 https://yugansproduct.in  
+🔗 Backend API: https://api.yugansproduct.in  
 
-## React Compiler
+## 🧰 Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Frontend
+- React.js
+- Tailwind CSS
+- Axios
 
-## Expanding the ESLint configuration
+### Backend
+- Node.js
+- Express.js
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Database
+- MongoDB
+
+### Other Tools
+- JWT Authentication
+- REST APIs
+- Razorpay (Payment Integration)
+- LocalStorage
+
+## ✨ Features
+
+- 🔐 User Authentication (Login / Signup with JWT)
+- 🛍️ Product Listing & Detailed View
+- 🛒 Add to Cart & Cart Management
+- 💳 Online Payment Integration (Razorpay)
+- 📦 Order Management
+- 📱 Fully Responsive Design
+- ⚡ Fast & Dynamic UI with React
+
