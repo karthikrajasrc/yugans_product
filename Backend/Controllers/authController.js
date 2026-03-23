@@ -66,7 +66,6 @@ const authController = {
   secure: isProduction,
   sameSite: isProduction ? "None" : "Lax",
   path: "/",
-  domain: isProduction ? ".yugansproduct.in" : undefined,
   maxAge: 3 * 60 * 60 * 1000
 });
 
@@ -97,7 +96,6 @@ const authController = {
   secure: isProduction,
   sameSite: isProduction ? "None" : "Lax",
   path: "/",
-  domain: isProduction ? ".yugansproduct.in" : undefined,
   maxAge: 3 * 60 * 60 * 1000
             });
             
@@ -130,7 +128,6 @@ const authController = {
   secure: isProduction,
   sameSite: isProduction ? "None" : "Lax",
   path: "/",
-  domain: isProduction ? ".yugansproduct.in" : undefined,
   maxAge: 3 * 60 * 60 * 1000
 });
         return res.status(200).json({
@@ -158,13 +155,11 @@ const authController = {
         }
     }, logout: async (req, res) => {
         try {
-           
-         res.clearCookie("Token", {
+           res.clearCookie("Token", {
   httpOnly: true,
-  secure: isProduction,
-  sameSite: isProduction ? "None" : "Lax",
-  path: "/",
-  domain: isProduction ? ".yugansproduct.in" : undefined
+  secure: true,
+  sameSite: "None",
+  path: "/"
 });
 
             return res.status(200).json({ message: 'logout successful' });
