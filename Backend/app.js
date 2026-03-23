@@ -19,4 +19,11 @@ app.use("/api/payment", router);
 app.use("/auth", authRouter);
 app.use("/product", productRouter);
 
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "OK",
+    message: "Server running 🚀"
+  });
+});
+
 module.exports = app;
