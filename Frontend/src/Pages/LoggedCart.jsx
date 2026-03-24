@@ -3,6 +3,7 @@ import instance from "../protectedInstances/axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import ScrollReveal from "../Components/Scroll";
 
 
 const LoggedCart = () => {
@@ -111,8 +112,11 @@ const order = res.data;
   return (
     <>
       {cartItems.length === 0 ? (<div className="flex justify-center text-center h-80 items-center">
-        <h1 className="md:text-4xl text-xl font-bold text-[#1E4A1E]">Your cart is Empty!!</h1>
-        </div>) : (
+        <ScrollReveal>
+          <h1 className="md:text-4xl text-xl font-bold text-[#1E4A1E]">Your cart is Empty!!</h1>
+          </ScrollReveal>
+      </div>) : (
+          <ScrollReveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <h1 className="md:text-3xl text-2xl font-bold text-[#1E4A1E] mb-6">Your Cart</h1>
             <div className="bg-white shadow-md rounded-lg md:p-6 p-2">
@@ -207,7 +211,8 @@ const order = res.data;
                 <button onClick={hanldecheckout} className="border-gray-200 border rounded-lg font-bold bg-[#8DC21F] text-white py-1 px-1.5">Checkout</button>
               </div>
             </div>
-          </div>
+            </div>
+            </ScrollReveal>
       )}    
               
                

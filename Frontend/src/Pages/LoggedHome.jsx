@@ -6,6 +6,7 @@ import { Link } from "react-router";
 import { useContext } from "react";
 import { AuthContext } from "../../Authprovider.jsx";
 import Spinner from "../Components/Spinner.jsx";
+import ScrollReveal from "../Components/Scroll.jsx";
 
 
 const LoggedHome = () => {
@@ -81,6 +82,7 @@ const LoggedHome = () => {
         </section>
 
         {/* Marquee */}
+        <ScrollReveal>
         <div className="bg-[#8DC21F] py-2.5 overflow-hidden">
           <div className="flex gap-12 whitespace-nowrap animate-[marquee_20s_linear_infinite]">
             {[...Array(3)].flatMap(() => ["🌾 100% Natural","🏆 Premium Quality","🌶️ Authentic Spices","🌿 No Additives","🚚 Pan India Delivery","💚 No Preservatives"]).map((t,i)=>(
@@ -88,9 +90,10 @@ const LoggedHome = () => {
             ))}
           </div>
         </div>
-
+            </ScrollReveal>
         {/* Features */}
-        <section className="py-14 sm:py-20 bg-white">
+        <ScrollReveal>
+        <section className="py-14 sm:py-20 bg-[#F5F9E8]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10 sm:mb-14">
               <span className="text-[#8DC21F] font-extrabold text-xs uppercase tracking-widest">Why Choose Us</span>
@@ -98,7 +101,7 @@ const LoggedHome = () => {
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
               {[["🌾","Farm Fresh","Certified organic farms"],["🏆","Premium Quality","Stone-ground for max nutrition"],["🚚","Fast Delivery","2-3 days Pan India"],["🌿","No Additives","Made with pure, natural ingredients and absolutely no artificial additives"],["🌱","No Preservatives","100% natural ingredients"],["♻️","Eco Packaging","Sustainable biodegradable packs"]].map(([icon,title,desc]) => (
-                <div key={title} className="bg-[#F5F9E8] rounded-2xl p-4 sm:p-6 border border-[#E8F2D0] hover:border-[#8DC21F] hover:shadow-lg hover:shadow-[#8DC21F]/10 transition-all duration-300 group">
+                <div key={title} className="bg-white rounded-2xl p-4 sm:p-6 border border-[#E8F2D0] hover:border-[#8DC21F] hover:shadow-lg shadow-xl hover:shadow-[#8DC21F]/10 transition-all duration-300 group">
                   <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform">{icon}</div>
                   <h3 className="font-extrabold text-[#2D6A2D] text-sm sm:text-base mb-1">{title}</h3>
                   <p className="text-gray-500 text-xs sm:text-sm leading-relaxed">{desc}</p>
@@ -107,9 +110,10 @@ const LoggedHome = () => {
             </div>
           </div>
         </section>
-
+              </ScrollReveal>
         {/* Categories */}
-        <section className="py-14 sm:py-10 sm:mb-10 bg-white">
+        <ScrollReveal>
+        <section className="py-14 sm:py-10 sm:mb-10 bg-[#F5F9E8]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-8 sm:mb-12">
               <span className="text-[#8DC21F] font-extrabold text-xs uppercase tracking-widest">Browse By</span>
@@ -137,8 +141,9 @@ const LoggedHome = () => {
             </div>
           </div>
         </section>
-
+              </ScrollReveal>
         {/* Banner */}
+        <ScrollReveal>
         <section className="py-12 sm:py-16 bg-linear-to-r from-[#8DC21F] to-[#7AB01A] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2" />
           <div className="max-w-3xl mx-auto px-4 text-center relative z-10">
@@ -148,8 +153,9 @@ const LoggedHome = () => {
             <button className="bg-white text-[#2D6A2D] font-black px-8 sm:px-10 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base shadow-2xl hover:-translate-y-1 hover:shadow-3xl transition-all">Start Shopping →</button></Link>
           </div>
         </section>
-
+</ScrollReveal>
         {/* Testimonials */}
+        <ScrollReveal>
         <section className="py-14 sm:py-20 bg-[#F5F9E8]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-10">
@@ -174,7 +180,7 @@ const LoggedHome = () => {
             </div>
           </div>
         </section>
-
+</ScrollReveal>
         {/* Footer */}
         <footer className="bg-[#1E4A1E] text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">

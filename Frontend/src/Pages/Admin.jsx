@@ -5,6 +5,7 @@ import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import ScrollReveal from "../Components/Scroll";
 
 
 const Admin = () => {
@@ -158,7 +159,9 @@ const [grams, setGrams] = useState("");
               <div>
                     <h2 className="font-black md:text-3xl text-md text-center mt-10 mb-6  text-white">Admin Dashboard</h2>
               </div>
-          </div>
+      </div>
+      
+      <ScrollReveal>
           <div>
               
               <div className="flex flex-wrap justify-center md:gap-6 gap-2 md:mt-10 mt-5">
@@ -175,7 +178,8 @@ const [grams, setGrams] = useState("");
             <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Products<p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">{ products.length }</p></button>
                   </div>
                 </div>
-          </div>
+        </div>
+        </ScrollReveal>
           {showAddProductForm && (<div className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 flex items-center justify-center">
               <form type="submit" className="md:w-2xl w-80 mx-auto mt-10 p-6 bg-white rounded-lg shadow-md z-50 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 backdrop-blur-2xl">
               <h2 className="md:text-2xl text-xl font-bold md:mb-6 mb-2 text-[#1E4A1E]">Add New Product</h2>
@@ -251,11 +255,13 @@ const [grams, setGrams] = useState("");
           
           <button type="button" onClick={() => { setShowAddProductForm(false); handlecancel(); }} className="bg-[#1E4A1E] text-white font-bold md:px-4 md:py-2 px-2 py-1 ml-1 rounded-lg hover:bg-[#2D6A2D] transition-colors">Cancel</button> 
               </form>
-          </div>)}
+      </div>)}
+      <ScrollReveal>
           <div className="md:ml-15 ml-8 md:mt-10 mt-6">
               <h2 className="md:text-3xl text-2xl mt-10 mb-6 font-black text-[#2D6A2D]">Products</h2>
       </div>
-      
+      </ScrollReveal>
+      <ScrollReveal>
       <div className="md:max-w-7xl mx-auto md:px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
         <table className="bg-white md:w-300 text-center w-full rounded-3xl">
           <thead className="bg-[#1E4A1E] text-white text-[12px] md:text-xl rounded-3xl">
@@ -270,7 +276,7 @@ const [grams, setGrams] = useState("");
           <tbody>
             {products.map(p => (
               <tr key={p._id} className="border-t border-gray-300 text-[14px] md:text-[18px]">
-                <td className="py-2 md:px-2"><img src={p.image} alt={p.productName} className="w-full h-full" /></td>
+                <td className="py-2 md:px-2"><img src={p.image} alt={p.productName} className="w-16.25 h-22.25" /></td>
                 <td className="py-2 md:px-2 md:text-[18px] font-bold">{p.productName}</td>
                 <td className="py-2 md:px-2 md:text-[18px] font-bold">₹{p.price}</td>
                 <td className="py-2 md:px-2 md:text-[18px] font-bold">{p.grams}g</td>
@@ -280,7 +286,7 @@ const [grams, setGrams] = useState("");
           </tbody>
         </table>
       </div>
-
+            </ScrollReveal>
                   <footer className="bg-[#1E4A1E] text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">

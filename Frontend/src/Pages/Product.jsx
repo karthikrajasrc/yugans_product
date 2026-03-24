@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router";
 import instance from "../protectedInstances/axios";
 import { AuthContext } from "../../Authprovider";
+import ScrollReveal from "../Components/Scroll";
 
 
 const Product = () => {
@@ -45,7 +46,8 @@ const handleCart = () => {
   
 
   return (
-      <>
+    <>
+
             <div className="bg-[#1E4A1E] py-12 sm:py-16 relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-48 h-48 bg-[#8DC21F]/15 rounded-full blur-3xl" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
@@ -53,7 +55,9 @@ const handleCart = () => {
                     <h1 className="font-black text-white text-4xl sm:text-5xl mt-2">Our <span className="text-[#8DC21F]">Products</span></h1>
                     <p className="text-gray-300 text-sm mt-2">Premium multigrains, masalas and superfoods</p>
                 </div>
-            </div>
+        </div>
+
+      <ScrollReveal>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
                 <div className="flex flex-col sm:flex-row gap-3 mb-5 sm:mb-7">
                     <div className="relative flex-1">
@@ -68,13 +72,17 @@ const handleCart = () => {
                         <option value="price-desc">Price: High → Low</option>
                     </select>
                 </div>
-      </div>
+        </div>
+      </ScrollReveal>
+      
       <div>
-          <div className="max-w-7xl mx-auto md:px-4 px-1 sm:px-6 lg:px-8 py-6 sm:py-10">
+        <div className="max-w-7xl mx-auto md:px-4 px-1 sm:px-6 lg:px-8 py-6 sm:py-10">
+          
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-2">
-                  {filteredProducts.map(p => (
+            {filteredProducts.map(p => (
+                    <ScrollReveal>
                       <div key={p._id} className="bg-white rounded-lg shadow-md overflow-hidden relative">
-                      <img src={p.image} alt={p.productName} className="w-full md:h-85 h-50 object-cover" />
+                      <img src={p.image} alt={p.productName} className="w-full md:h-95 h-60 object-cover" />
                       <div className="absolute top-3 right-3 bg-[#ffffff] text-[#2D6A2D] text-xs font-extrabold px-2 py-1 rounded-md shadow-md">
           {p.grams}g
       </div>
@@ -86,7 +94,7 @@ const handleCart = () => {
                             <span className="md:text-xl text-sm font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="text-[15px] text-red-400 font-bold ml-2 line-through">₹{Math.round(Number(p.price) + Number(p.price) * 25 / 100)}</span>
                             <button
                             onClick={handleCart}
-                            className="bg-[#8DC21F] hover:bg-[#6abf6a] text-white font-bold md:px-4 md:py-2 px-2 py-0.5 rounded-sm text-sm"
+                            className="bg-[#8DC21F] hover:bg-[#6abf6a] text-white md:ml-4 mt-1 font-bold md:px-4 md:py-2 px-2 py-0.5 rounded-sm text-sm"
 >
   Add Cart
 </button>
@@ -95,11 +103,13 @@ const handleCart = () => {
                         </div>
                       </div> 
                   
-                      </div>
+                </div>
+                </ScrollReveal>
                       ))}
-          </div>
+            </div>
         </div>
-      </div>   
+        </div>  
+       
       <div>
         <footer className="bg-[#1E4A1E] text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">

@@ -11,6 +11,7 @@ import ProtectedRoute from "./Routes/ProtectedRoutes.jsx";
 import Admin from "./Pages/Admin";
 import AdminRoute from "./Routes/AdminRoutes";
 import PublicRoute from "./Routes/PublicRoutes";
+import ScrollToTop from "./Components/top.jsx";
 
 const App = () => {
 

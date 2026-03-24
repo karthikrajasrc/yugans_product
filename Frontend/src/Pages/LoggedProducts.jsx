@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link } from "react-router";
 import instance from "../protectedInstances/axios";
 import toast from "react-hot-toast";
+import ScrollReveal from "../Components/Scroll";
 
 
 const LoggedProducts = () => {
@@ -71,7 +72,8 @@ const handleCart = (id) => {
                     <h1 className="font-black text-white text-4xl sm:text-5xl mt-2">Our <span className="text-[#8DC21F]">Products</span></h1>
                     <p className="text-gray-300 text-sm mt-2">Premium multigrains, masalas and superfoods</p>
                 </div>
-            </div>
+      </div>
+      <ScrollReveal>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10">
                 <div className="flex flex-col sm:flex-row gap-3 mb-5 sm:mb-7">
                     <div className="relative flex-1">
@@ -86,13 +88,15 @@ const handleCart = (id) => {
                         <option value="price-desc">Price: High → Low</option>
                     </select>
                 </div>
-      </div>
+        </div>
+        </ScrollReveal>
       <div>
           <div className="max-w-7xl mx-auto md:px-4 px-1 sm:px-6 lg:px-8 py-6 sm:py-10">
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 md:gap-6 gap-2">
-                  {filteredProducts.map(p => (
+            {filteredProducts.map(p => (
+                    <ScrollReveal>
                       <div key={p._id} className="bg-white rounded-lg shadow-md overflow-hidden relative">
-                      <img src={p.image} alt={p.productName} className="w-full h-50 md:h-85 object-cover" />
+                      <img src={p.image} alt={p.productName} className="w-full h-60 md:h-95 object-cover" />
                       <div className="absolute top-3 right-3 bg-[#ffffff] text-[#2D6A2D] text-xs font-extrabold px-2 py-1 rounded-md shadow-md">
           {p.grams}g
       </div>
@@ -101,7 +105,7 @@ const handleCart = (id) => {
                               <p className="md:text-sm text-[13px] text-gray-600 mt-1">{p.description}</p>
                         <div className="mt-3 flex flex-col items-center justify-end">
                           <div>
-                            <span className="text-xl font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="md:text-[15px] text-[13px] text-red-300 font-bold ml-2 line-through">₹{Math.round(Number(p.price) + Number(p.price) * 25 / 100)}</span>
+                            <span className="text-xl font-extrabold text-[#2D6A2D]">₹{p.price}</span><span className="md:text-[15px] text-[13px] text-red-400 font-bold ml-2 line-through">₹{Math.round(Number(p.price) + Number(p.price) * 25 / 100)}</span>
                           </div>
                           <div>
                           <button
@@ -118,7 +122,8 @@ const handleCart = (id) => {
                         </div>
                       </div> 
                   
-                      </div>
+                </div>
+                </ScrollReveal>
                       ))}
           </div>
         </div>

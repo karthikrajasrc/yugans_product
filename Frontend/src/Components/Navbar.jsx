@@ -6,6 +6,7 @@ import instance from "../protectedInstances/axios";
 import { AuthContext } from "../../Authprovider";
 import toast from "react-hot-toast";
 import Spinner from "./Spinner";
+import ScrollToTop from "./top";
 
 
 const Navbar = () => {
@@ -37,6 +38,7 @@ const Navbar = () => {
 
     return (
         <>
+            <ScrollToTop />
             {authModal && (
       <LoginRegister 
         authModal={authModal}
