@@ -11,7 +11,7 @@ const productRouter = require("./Routers/productRouter");
 app.use(cookieParser());
 
 app.use(cors({
-  origin: ["https://yugansproduct.in", "https://www.yugansproduct.in"],
+  origin: ["https://yugansproduct.in", "https://www.yugansproduct.in", "http://localhost:5173"],
   credentials: true
 }));
 
