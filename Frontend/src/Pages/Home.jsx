@@ -4,6 +4,8 @@ import masala from "../Images/masalaimg.webp"
 import grains from "../Images/grainimg.webp"
 import { Link } from "react-router";
 import ScrollReveal from "../Components/Scroll";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 
 
@@ -78,7 +80,7 @@ const Home = () => {
                 <Link to={"/products"}><button className="bg-linear-to-r from-[#8DC21F] to-[#7AB01A] text-white font-black px-7 sm:px-9 py-3.5 sm:py-4 rounded-2xl text-sm sm:text-base hover:from-[#A8D832] hover:to-[#8DC21F] hover:-translate-y-1 hover:shadow-2xl hover:shadow-[#8DC21F]/40 transition-all active:scale-95">Shop Now →</button></Link>
               </div>
               <div className="flex gap-8 sm:gap-10 mt-8 pt-6 sm:pt-8 border-t border-white/15">
-                {[["50+","Products"],["2K+","Customers"],["100%","Natural"]].map(([v,l]) => (
+                {[["30+","Products"],["2K+","Customers"],["100%","Natural"]].map(([v,l]) => (
                   <div key={l}><div className="text-[#8DC21F] font-black text-2xl sm:text-3xl">{v}</div><div className="text-gray-400 text-xs sm:text-sm">{l}</div></div>
                 ))}
               </div>
@@ -117,7 +119,7 @@ const Home = () => {
               <h2 className="font-black text-[#2D6A2D] text-3xl sm:text-4xl lg:text-5xl mt-2">The Yugan's <span className="text-[#8DC21F]">Difference</span></h2>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
-              {[["🌾","Farm Fresh","Certified organic farms"],["🏆","Premium Quality","Stone-ground for max nutrition"],["🚚","Fast Delivery","2-3 days Pan India"],["🌿","No Additives","Made with pure, natural ingredients and absolutely no artificial additives"],["🌱","No Preservatives","100% natural ingredients"],["♻️","Eco Packaging","Sustainable biodegradable packs"]].map(([icon,title,desc]) => (
+              {[["🌾","Farm Fresh","Certified organic farms"],["🏆","Premium Quality","Stone-ground for max nutrition"],["🚚","Fast Delivery","5-7 days Pan India"],["🌿","No Additives","Made with pure, natural ingredients and absolutely no artificial additives"],["🌱","No Preservatives","100% natural ingredients"],["♻️","Eco Packaging","Sustainable biodegradable packs"]].map(([icon,title,desc]) => (
                 <div key={title} className="bg-white rounded-2xl p-4 sm:p-6 border border-[#E8F2D0] hover:border-[#8DC21F] hover:shadow-lg shadow-xl hover:shadow-[#8DC21F]/10 transition-all duration-300 group">
                   <div className="text-3xl sm:text-4xl mb-3 sm:mb-4 group-hover:scale-110 transition-transform">{icon}</div>
                   <h3 className="font-extrabold text-[#2D6A2D] text-sm sm:text-base mb-1">{title}</h3>
@@ -200,7 +202,7 @@ const Home = () => {
             </ScrollReveal>
         {/* Footer */}
         <footer className="bg-[#1E4A1E] text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+          <div className="md:max-w-7xl max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
               <div className="col-span-2 sm:col-span-2 lg:col-span-1">
                 <div className="flex items-center gap-3 mb-4">
@@ -224,10 +226,22 @@ const Home = () => {
                 ))}
               </div>
               <div>
-                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
-                {["📍 Karur, Tamil Nadu","📞 +91 63812 10833","📧 yugansproduct@gmail.com","⏰ Monday-Sunday: 9am–6pm"].map(c => (
-                  <div key={c} className="text-gray-400 text-xs sm:text-sm mb-2">{c}</div>
-                ))}
+                <div>
+  <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
+
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📍 Karur, Tamil Nadu</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📞 +91 63812 10833</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📧 yugansproduct@gmail.com</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">⏰ Monday-Sunday: 9am–6pm</div>
+
+  {/* Instagram icon */}
+  <div className="flex gap-4 text-xl mt-2">
+    <FontAwesomeIcon 
+      icon={faInstagram} style={{ color: "#E1306C" }}
+      className="cursor-pointer hover:text-pink-500 transition"
+    /> <span className="text-gray-400 text-xs sm:text-sm mb-2">Yugansproduct</span>
+  </div>
+</div>
               </div>
             </div>
           </div>

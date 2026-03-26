@@ -3,15 +3,15 @@ import { Link } from "react-router";
 import instance from "../protectedInstances/axios";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ScrollReveal from "../Components/Scroll";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+
 
 
 const Admin = () => {
 
-    const [ordercount, setOrderCount] = useState(0);
-    const [totalRevenue, setTotalRevenue] = useState(500);
   const [showAddProductForm, setShowAddProductForm] = useState(false);
   const [loading, setLoading] = useState(false);
     const [products, setProducts] = useState([]);
@@ -24,6 +24,8 @@ const [grams, setGrams] = useState("");
   const [updatebtn, setUpdateBtn] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const [orderCount, setOrderCount] = useState(0);
+  const [revenue, setRevenue] = useState(0);
   
 
      useEffect(() => {
@@ -145,7 +147,33 @@ const [grams, setGrams] = useState("");
       toast.error("Failed to update product");
     }
     
-   }
+  }
+  
+  useEffect( () => {
+    const fetchOrderCount = async () => {
+      try {
+        const res = await instance.get("api/payment/my-orders");
+        setOrderCount(res.data.length);
+      } catch (err) {
+        console.error("Error fetching order count:", err);
+      }
+    };
+  
+    fetchOrderCount();
+  }, []);
+
+   useEffect( () => {
+    const fetchRevenue = async () => {
+      try {
+        const res = await instance.get("api/payment/revenue");
+        setRevenue(res.data.totalRevenue);
+      } catch (err) {
+        console.error("Error fetching order count:", err);
+      }
+    };
+  
+    fetchRevenue();
+  }, []);
 
 
   return (
@@ -169,10 +197,10 @@ const [grams, setGrams] = useState("");
                       <button onClick={() => setShowAddProductForm(true)} className="bg-[#ffffff] text-black md:px-10 md:py-15 px-6 py-8 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors md:text-xl text-md font-bold">Add Product +</button>
                   </div>
                   <div>
-                      <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Total Orders <p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">{ ordercount}</p></button>
+                      <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Total Orders <p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">{ orderCount}</p></button>
                   </div>
                   <div>
-                      <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Total Revenue <p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">₹ { totalRevenue}</p></button> 
+                      <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Total Revenue <p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">₹ { revenue}</p></button> 
                   </div>
                   <div>
             <button className="bg-[#ffffff] text-black font-extrabold md:px-10 px-6 py-4 md:py-10 rounded-lg shadow-md hover:bg-[#daf3af] transition-colors">Products<p className="font-black text-[#2D6A2D] pt-2 md:text-2xl text-md sm:text-3xl">{ products.length }</p></button>
@@ -288,45 +316,57 @@ const [grams, setGrams] = useState("");
       </div>
             </ScrollReveal>
                   <footer className="bg-[#1E4A1E] text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
-            <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
-              <div className="col-span-2 sm:col-span-2 lg:col-span-1">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-[#8DC21F] flex items-center justify-center font-black text-white text-lg shadow-lg">Y</div>
-                  <div><div className="text-[#8DC21F] font-black text-base">Yugan's Product</div><div className="text-[#6abf6a] text-[10px] italic">Meal time in a Minute</div></div>
-                </div>
-                <p className="text-gray-400 text-sm leading-relaxed">Premium quality multigrains, masalas and spices sourced from the finest farms across India.</p>
-              </div>
-              <div>
-                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Quick Links</h4>
-                <div className="text-gray-400 text-sm mb-2">
-                  <Link to="/home"><p className="mb-2">Home</p></Link>
-                  <Link to="/product"><p className="mb-2">Products</p></Link>
-                   <Link to="/cart"> <p className="mb-2">Cart</p></Link>
-                   <Link to="/orders"> <p className="mb-2">Orders</p></Link>
-                </div>
-              </div>
-              <div>
-                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Categories</h4>
-                {["Multigrains","Masalas","Porridge"].map(c => (
-                  <div key={c} className="text-gray-400 text-sm mb-2">{c}</div>
-                ))}
-              </div>
-              <div>
-                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
-                {["📍 Karur, Tamil Nadu","📞 +91 63812 10833","📧 yugansproduct@gmail.com","⏰ Monday-Sunday: 9am–6pm"].map(c => (
-                  <div key={c} className="text-gray-400 text-xs sm:text-sm mb-2">{c}</div>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-white/10 py-4 px-4 sm:px-6">
-            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-              <p className="text-gray-500 text-xs">© 2026 Yugan's Products. All rights reserved.</p>
-              <div className="flex gap-4 text-xs text-gray-500"><span>🌿 Natural</span><span>🏆 Quality</span><span>🚚 Fast</span></div>
-            </div>
-          </div>
-        </footer>
+                            <div className="md:max-w-7xl max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+                              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
+                                <div className="col-span-2 sm:col-span-2 lg:col-span-1">
+                                  <div className="flex items-center gap-3 mb-4">
+                                    <div className="w-10 h-10 rounded-full bg-[#8DC21F] flex items-center justify-center font-black text-white text-lg shadow-lg">Y</div>
+                                    <div><div className="text-[#8DC21F] font-black text-base">Yugan's Product</div><div className="text-[#6abf6a] text-[10px] italic">Meal time in a Minute</div></div>
+                                  </div>
+                                  <p className="text-gray-400 text-sm leading-relaxed">Premium quality multigrains, masalas and spices sourced from the finest farms across India.</p>
+                                </div>
+                                <div>
+                                  <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Quick Links</h4>
+                                  <div className="text-gray-400 text-sm mb-2">
+                                    <Link to="/"><p className="mb-2">Home</p></Link>
+                                    <Link to="/product"><p className="mb-2">Products</p></Link>
+                                    <Link to="/cart"> <p className="mb-2">Cart</p></Link>
+                                    <Link to="/orders"> <p className="mb-2">Orders</p></Link>
+                                  </div>
+                                </div>
+                                <div>
+                                  <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Categories</h4>
+                                  {["Multigrains","Masalas","Porridge"].map(c => (
+                                    <div key={c} className="text-gray-400 text-sm mb-2">{c}</div>
+                                  ))}
+                                </div>
+                                <div>
+                                  <div>
+                    <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
+                  
+                    <div className="text-gray-400 text-xs sm:text-sm mb-2">📍 Karur, Tamil Nadu</div>
+                    <div className="text-gray-400 text-xs sm:text-sm mb-2">📞 +91 63812 10833</div>
+                    <div className="text-gray-400 text-xs sm:text-sm mb-2">📧 yugansproduct@gmail.com</div>
+                    <div className="text-gray-400 text-xs sm:text-sm mb-2">⏰ Monday-Sunday: 9am–6pm</div>
+                  
+                    {/* Instagram icon */}
+                    <div className="flex gap-4 text-xl mt-2">
+                      <FontAwesomeIcon 
+                        icon={faInstagram} style={{ color: "#E1306C" }}
+                        className="cursor-pointer hover:text-pink-500 transition"
+                      /> <span className="text-gray-400 text-xs sm:text-sm mb-2">Yugansproduct</span>
+                    </div>
+                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="border-t border-white/10 py-4 px-4 sm:px-6">
+                              <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+                                <p className="text-gray-500 text-xs">© 2026 Yugan's Products. All rights reserved.</p>
+                                <div className="flex gap-4 text-xs text-gray-500"><span>🌿 Natural</span><span>🏆 Quality</span><span>🚚 Fast</span></div>
+                              </div>
+                            </div>
+                          </footer>
       </>
   )
 }

@@ -7,11 +7,10 @@ import LoggedHome from "./Pages/LoggedHome";
 import LoggedCart from "./Pages/LoggedCart";
 import LoggedOrders from "./Pages/LoggedOrders";
 import LoggedProducts from "./Pages/LoggedProducts";
-import ProtectedRoute from "./Routes/ProtectedRoutes.jsx";
 import Admin from "./Pages/Admin";
 import AdminRoute from "./Routes/AdminRoutes";
 import PublicRoute from "./Routes/PublicRoutes";
-import ScrollToTop from "./Components/top.jsx";
+import ProtectedRoute from "./Routes/protectedRoutes";
 
 const App = () => {
 
@@ -28,7 +27,7 @@ const App = () => {
                     element: (<PublicRoute> <Product /> </PublicRoute> ) 
                 }, {
                     path: "home",
-                    element: (<ProtectedRoute> <LoggedHome /> </ProtectedRoute>) 
+                    element: (<ProtectedRoute> <LoggedHome /> </ProtectedRoute>)
                 }, {
                     path: "cart",
                     element: (<ProtectedRoute> <LoggedCart /> </ProtectedRoute>)

@@ -3,6 +3,8 @@ import { Link } from "react-router";
 import instance from "../protectedInstances/axios";
 import { AuthContext } from "../../Authprovider";
 import ScrollReveal from "../Components/Scroll";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 
 
 const Product = () => {
@@ -112,7 +114,7 @@ const handleCart = () => {
        
       <div>
         <footer className="bg-[#1E4A1E] text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+          <div className="md:max-w-7xl max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
               <div className="col-span-2 sm:col-span-2 lg:col-span-1">
                 <div className="flex items-center gap-3 mb-4">
@@ -136,10 +138,22 @@ const handleCart = () => {
                 ))}
               </div>
               <div>
-                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
-                {["📍 Karur, Tamil Nadu","📞 +91 63812 10833","📧 yugansproduct@gmail.com","⏰ Monday-Sunday: 9am–6pm"].map(c => (
-                  <div key={c} className="text-gray-400 text-xs sm:text-sm mb-2">{c}</div>
-                ))}
+                <div>
+  <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
+
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📍 Karur, Tamil Nadu</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📞 +91 63812 10833</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📧 yugansproduct@gmail.com</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">⏰ Monday-Sunday: 9am–6pm</div>
+
+  {/* Instagram icon */}
+  <div className="flex gap-4 text-xl mt-2">
+    <FontAwesomeIcon 
+      icon={faInstagram} style={{ color: "#E1306C" }}
+      className="cursor-pointer hover:text-pink-500 transition"
+    /> <span className="text-gray-400 text-xs sm:text-sm mb-2">Yugansproduct</span>
+  </div>
+</div>
               </div>
             </div>
           </div>

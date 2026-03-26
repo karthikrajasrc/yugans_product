@@ -1,62 +1,44 @@
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import instance from "../protectedInstances/axios";
 import { useEffect } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import ScrollReveal from "../Components/Scroll";
+import { useContext } from "react";
+import { AuthContext } from "../../Authprovider";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+
 
 
 const LoggedCart = () => {
 
   const [products, setProducts] = useState([]);
-  const [quantity, setQuantity] = useState({});
+ const [quantity, setQuantity] = useState(
+  JSON.parse(localStorage.getItem("quantity")) || {}
+);
+  const { user } = useContext(AuthContext);
+ 
+  useEffect(() => {
+  localStorage.setItem("quantity", JSON.stringify(quantity));
+}, [quantity]);
+  
 
   const [cartItems, setCartItems] = useState(
   JSON.parse(localStorage.getItem("cart")) || []
-);
+  );
+  
+  const [address, setAddress] = useState({
+  firstName: "",
+  lastName: "",
+  fullAddress: "",
+  pincode: "",
+  phone: "",
+  altPhone: ""
+});
 
 
-    const hanldecheckout = async () => { 
-        const res = await instance.post("/api/payment/create-order", {
-    amount: 500,
-  });
-
-const order = res.data; 
-
-  openRazorpay(order);
-    }
-
-    const openRazorpay = (order) => {
-  const options = {
-    key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
-    amount: order.amount,
-    currency: "INR",
-    name: "Your Store",
-    description: "Order Payment",
-    order_id: order.id,
-
-    handler: function (response) {
-      console.log(response);
-      verifyPayment(response);
-    },
-  };
-
-  const rzp = new window.Razorpay(options);
-  rzp.open();
-    };
-    
-
-    const verifyPayment = async (response) => {
-  const res = await instance.post("/api/payment/verify-payment", response);
-
-  const data = await res.data;
-
-  if (data.success) {
-    alert("Payment Success 🎉");
-  } else {
-    alert("Payment Failed ❌");
-  }
-  };
+ 
   
     useEffect(() => {
     const fetchProducts = async () => {
@@ -94,6 +76,7 @@ const order = res.data;
     setQuantity(prev => {
       const newQty = { ...prev };
       delete newQty[id]; 
+      localStorage.setItem("quantity", JSON.stringify(newQty));
       return newQty;
     });
 
@@ -108,6 +91,95 @@ const order = res.data;
 };
 
   const total = fillerProducts.reduce((sum, p) => sum + p.price * (quantity[p._id] || 1), 0);
+
+
+  const handleChange = (e) => {
+  setAddress({
+    ...address,
+    [e.target.name]: e.target.value
+  });
+};
+const isFormValid = () => {
+  return (
+    address.firstName &&
+    address.lastName &&
+    address.fullAddress &&
+    address.pincode &&
+    address.phone &&
+    address.altPhone
+  );
+};
+
+  const hanldecheckout = async () => {
+
+  if (!isFormValid()) {
+    console.log("Form not filled ❌");
+    toast.error("Fill all address fields ❌");
+    return;
+    }
+    
+       const amount = fillerProducts.reduce(
+  (total, p) => total + p.price * (quantity[p._id] || 1),
+  0
+) + 70;
+        const res = await instance.post("/api/payment/create-order", {amount});
+
+const order = res.data; 
+
+  openRazorpay(order);
+    }
+
+    const openRazorpay = (order) => {
+  const options = {
+    key: import.meta.env.VITE_RAZORPAY_KEY_ID, 
+    amount: order.amount,
+    currency: "INR",
+    name: "Yugans Product",
+    description: "Order Payment",
+    order_id: order.id,
+
+    handler: function (response) {
+      console.log(response);
+      verifyPayment(response);
+    },
+  };
+
+  const rzp = new window.Razorpay(options);
+  rzp.open();
+    };
+    
+
+    const verifyPayment = async (response) => {
+      const res = await instance.post("/api/payment/verify-payment", {
+        ...response, cartItems: fillerProducts.map(p => ({
+  productId: p._id,
+  name: p.productName,
+  price: p.price,
+  quantity: quantity[p._id] || 1,
+  weight: p.grams
+})),
+        amount: total,
+        userId: user._id,
+        address: {
+          ...address
+        }
+      });
+
+      const data = res.data;
+      
+      localStorage.removeItem("cart");
+      localStorage.removeItem("quantity");
+      setCartItems([]);
+      setQuantity({});
+
+      Navigate("/orders");
+
+  if (data.success) {
+    alert("Payment Success 🎉");
+  } else {
+    alert("Payment Failed ❌");
+  }
+  };
     
   return (
     <>
@@ -118,50 +190,45 @@ const order = res.data;
       </div>) : (
           <ScrollReveal>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <h1 className="md:text-3xl text-2xl font-bold text-[#1E4A1E] mb-6">Your Cart</h1>
+              <h1 className="md:text-3xl text-2xl font-bold text-[#1E4A1E] mb-6">Your Cart</h1>
+              <form>
             <div className="bg-white shadow-md rounded-lg md:p-6 p-2">
               <div>
                 <h2 className="md:text-2xl text-xl font-bold text-[#1E4A1E] mb-6 border-b-gray-300 border-b pb-2">Delivery Address</h2>
                 <div className="flex gap-1 flex-wrap justify-center">
                 <div className="md:mx-4">
-                  <label className="block text-sm text-gray-700 mb-1 font-bold">Name</label>
-                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
-                </div>
-                <div className="md:mx-4">
-                  <label className="block text-sm text-gray-700 mb-1 font-bold">Door Number</label>
-                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
-                  </div>
-                  <div className="md:mx-4">
-                  <label className="block text-sm text-gray-700 mb-1 font-bold">Street 1</label>
-                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
-                </div>
-                <div className="md:mx-4">
-                  <label className="block text-sm text-gray-700 mb-1 font-bold">Street 2</label>
-                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
-                  </div>
-                  <div className="md:mx-4">
-                  <label className="block text-sm text-gray-700 mb-1 font-bold">City</label>
-                  <input type="text"  className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
-                  </div>
-                  <div className="md:mx-4">
-                  <label className="block text-sm text-gray-700 mb-1 font-bold">District</label>
-                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
-                  </div>
-                   <div className="md:mx-4">
-                  <label className="block text-sm text-gray-700 mb-1 font-bold">State</label>
-                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
+                  <label className="block text-sm text-gray-700 mb-1 font-bold">First Name</label>
+                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" name="firstName" onChange={handleChange} required/>
+                    </div>
+                    <div className="md:mx-4">
+                  <label className="block text-sm text-gray-700 mb-1 font-bold">Last Name</label>
+                  <input type="text" className="md:w-50 w-25 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" name="lastName" onChange={handleChange} required/>
+                    </div>
+                    <div>
+                      <label className="block text-sm text-gray-700 mb-1 font-bold">Full Address</label>
+                      <textarea type="text" className="md:w-120 h-20 w-70 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" name="fullAddress" onChange={handleChange} required/>
+                      </div>
+                      <div className="flex flex-row flex-wrap justify-center text-center gap-2">
+                     <div className="md:mx-4">
+                  <label className="block text-sm text-gray-700 mb-1 font-bold">Pincode</label>
+                  <input type="text" className="md:w-50 w-20 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" name="pincode" onChange={handleChange} required/>
                   </div>
                   <div className="md:mx-4">
                   <label className="block text-sm text-gray-700 mb-1 font-bold">Phone Number</label>
-                  <input type="number" className="md:w-50 w-30 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" />
-                  </div>
-                  
+                  <input type="number" className="md:w-50 w-30 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" name="phone" onChange={handleChange} required/>
+                      </div>
+                  <div className="md:mx-4">
+                  <label className="block text-sm text-gray-700 mb-1 font-bold">Alternate Phone Number</label>
+                  <input type="number" className="md:w-50 w-30 border text-[12px] md:text-sm border-gray-300 rounded-md md:p-2 p-1 md:mb-4 mb-1" name="altPhone" onChange={handleChange} required/>
+                        </div>
+                      </div>
 </div>
               </div>
-            </div>
+                </div>
+                </form>
             <div className="bg-white shadow-md rounded-lg md:p-6 p-2 mt-10">
               <div>
-                <h2 className="md:text-2xl text-xl font-bold text-[#1E4A1E] mb-6 border-b-gray-300 border-b pb-2">Your Cart</h2>
+                <h2 className="md:text-2xl text-xl font-bold text-[#1E4A1E] mb-6 border-b-gray-300 border-b pb-2">Cart</h2>
               </div>
                 {fillerProducts.map((f) => (
                   <div key={f._id} className="flex items-center justify-between mb-4 border border-gray-300 p-2 rounded-lg">
@@ -182,6 +249,7 @@ const order = res.data;
                       
                       <div>
                         <span className="md:text-xl text-md font-bold text-[#2D6A2D] mr-2">₹{f.price * (quantity[f._id] || 1)}</span>
+                        <span className="md:text-[12px] md:text-md text-[12px] font-bold text-red-400 mr-2 line-through">₹{(f.price * (25 / 100)) * (quantity[f._id] || 1)}</span>
                       </div>
                     </div>
                   </div>
@@ -193,17 +261,20 @@ const order = res.data;
                   <button className="border-gray-200 border rounded-lg font-bold bg-[#8DC21F] text-white md:py-1 py-0.5 px-1.5">Apply</button>
                 </div>
                 <div className="flex flex-col border border-gray-300 md:px-10 px-10 rounded-2xl">
-                  <div className="flex justify-start gap-2 mt-2">
-                  <h2 className="md:text-[18px] text-md font-bold text-black">SubTotal: <span className="md:text-[20px] text-[20px] md:ml-81 ml-25 text-[#2D6A2D] font-semibold">₹ {total}</span></h2>
-                </div>
-                <div className="flex justify-start gap-2">
-                  <h2 className="md:text-[18px] text-md font-bold text-black">Delivery Charges: <span className="md:text-[20px] text-[20px] md:ml-66 ml-12 text-[#2D6A2D] font-semibold">₹ 70</span></h2>
-                </div>
-                <div className="flex justify-start items-center gap-2 border-b border-b-gray-400 pb-2">
-                  <h2 className="md:text-[18px] text-md font-bold text-black">Discount: <span className="md:text-[20px] text-[20px] md:ml-83 ml-27 text-[#2D6A2D] font-bold">₹ {total * 25 / 100}</span></h2>
+                  <div className="flex justify-between gap-2 mt-2">
+                  <h2 className="md:text-[18px] text-md font-bold text-black">Actual Price: </h2> <h2 className="md:text-[20px] text-[20px] text-[#2D6A2D] font-semibold">₹ {total + (total * 25 / 100)}</h2>
+                    </div>
+                    <div className="flex justify-between items-center gap-2 border-b border-b-gray-400 md:pb-2 pb-1">
+                  <h2 className="md:text-[18px] text-md font-bold text-black">Discount:</h2> <h2 className="md:text-[20px] text-[20px] md:ml-83 ml-27 text-[#2D6A2D] font-bold">- ₹ {total * 25 / 100}</h2>
+                    </div>
+                    <div className="flex justify-between gap-2 md:mt-2 mt-1">
+                  <h2 className="md:text-[18px] text-md font-bold text-black">Total Price:</h2> <h2 className="md:text-[20px] text-[20px] md:ml-66 ml-12 text-[#2D6A2D] font-semibold">₹ {total}</h2>
                 </div> 
-                <div className="flex justify-start items-center gap-2 mt-4 md:mt-0 pb-4">
-                  <h2 className="md:text-xl text-md font-bold text-black">Total Amount: <span className="md:text-[29px] text-[22px] md:ml-65 ml-15 text-[#2D6A2D] font-extrabold">₹ {total + 70}</span></h2>
+                <div className="flex justify-between gap-2 md:mt-2 mt-1 border-b border-b-gray-400 md:pb-2 pb-1">
+                  <h2 className="md:text-[18px] text-md font-bold text-black">Delivery Charges:</h2> <h2 className="md:text-[20px] text-[20px] md:ml-66 ml-12 text-[#2D6A2D] font-semibold">₹ 70</h2>
+                </div> 
+                <div className="flex justify-between items-center gap-2 mt-2 md:mt-0 pb-4">
+                  <h2 className="md:text-xl text-md font-bold text-black">Total Amount:</h2> <h2 className="md:text-[29px] text-[22px] md:ml-65 ml-15 text-[#2D6A2D] font-extrabold">₹ {total + 70}</h2>
                 </div>
                 </div>
               </div>
@@ -225,7 +296,7 @@ const order = res.data;
 
 
       <footer className="bg-[#1E4A1E] text-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+          <div className="md:max-w-7xl max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
             <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-10">
               <div className="col-span-2 sm:col-span-2 lg:col-span-1">
                 <div className="flex items-center gap-3 mb-4">
@@ -237,10 +308,10 @@ const order = res.data;
               <div>
                 <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Quick Links</h4>
                 <div className="text-gray-400 text-sm mb-2">
-                  <Link to="/home"><p className="mb-2">Home</p></Link>
+                  <Link to="/"><p className="mb-2">Home</p></Link>
                   <Link to="/product"><p className="mb-2">Products</p></Link>
-                   <Link to="/cart"> <p className="mb-2">Cart</p></Link>
-                   <Link to="/orders"> <p className="mb-2">Orders</p></Link>
+                  <Link to="/cart"> <p className="mb-2">Cart</p></Link>
+                  <Link to="/orders"> <p className="mb-2">Orders</p></Link>
                 </div>
               </div>
               <div>
@@ -250,10 +321,22 @@ const order = res.data;
                 ))}
               </div>
               <div>
-                <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
-                {["📍 Karur, Tamil Nadu","📞 +91 63812 10833","📧 yugansproduct@gmail.com","⏰ Monday-Sunday: 9am–6pm"].map(c => (
-                  <div key={c} className="text-gray-400 text-xs sm:text-sm mb-2">{c}</div>
-                ))}
+                <div>
+  <h4 className="text-[#8DC21F] font-extrabold text-sm mb-4">Contact</h4>
+
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📍 Karur, Tamil Nadu</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📞 +91 63812 10833</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">📧 yugansproduct@gmail.com</div>
+  <div className="text-gray-400 text-xs sm:text-sm mb-2">⏰ Monday-Sunday: 9am–6pm</div>
+
+  {/* Instagram icon */}
+  <div className="flex gap-4 text-xl mt-2">
+    <FontAwesomeIcon 
+      icon={faInstagram} style={{ color: "#E1306C" }}
+      className="cursor-pointer hover:text-pink-500 transition"
+    /> <span className="text-gray-400 text-xs sm:text-sm mb-2">Yugansproduct</span>
+  </div>
+</div>
               </div>
             </div>
           </div>
