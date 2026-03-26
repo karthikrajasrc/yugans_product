@@ -10,7 +10,7 @@ import LoggedProducts from "./Pages/LoggedProducts";
 import Admin from "./Pages/Admin";
 import AdminRoute from "./Routes/AdminRoutes";
 import PublicRoute from "./Routes/PublicRoutes";
-import ProtectedRoute from "./Routes/protectedRoutes";
+import ProtectedRoute from "./Routes/protectedRoute";
 
 const App = () => {
 
