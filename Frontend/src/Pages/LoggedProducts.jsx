@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import ScrollReveal from "../Components/Scroll";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
+import { faCar, faCartShopping } from "@fortawesome/free-solid-svg-icons";
 
 
 const LoggedProducts = () => {
@@ -35,7 +36,7 @@ const LoggedProducts = () => {
       } catch (err) {
         console.error("Error fetching products:", err);
       }
-    };
+    }
 
     fetchProducts();
   }, []);
@@ -67,7 +68,16 @@ const handleCart = (id) => {
 
   return (
       <>
-            <div className="bg-[#1E4A1E] py-12 sm:py-16 relative overflow-hidden">
+      <div className="bg-[#1E4A1E] py-12 sm:py-16 relative overflow-hidden">
+        <Link to="/cart">
+          <div className="fixed z-30 px-2 py-2 bg-green-600 rounded-full shadow-lg right-5 md:right-20 md:bottom-21 bottom-12 cursor-pointer hover:bg-green-700 transition">
+            <div className="fixed z-30 bg-white rounded-lg p-1 shadow-lg right-5 md:right-20 md:bottom-22 bottom-12.5 cursor-pointer hover:bg-green-700 transition flex items-center gap-1 mb-7">
+              <p className="text-[12px] font-bold">{cartItems.length }</p>
+            </div>
+            <div>
+          <FontAwesomeIcon 
+      icon={faCartShopping} className="text-white text-[19px] md:text-2xl"/>
+        </div></div></Link>
                 <div className="absolute top-0 right-0 w-48 h-48 bg-[#8DC21F]/15 rounded-full blur-3xl" />
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
                     <span className="text-[#8DC21F] font-extrabold text-xs uppercase tracking-widest">Explore Our Range</span>

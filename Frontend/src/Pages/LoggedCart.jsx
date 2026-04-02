@@ -265,7 +265,7 @@ const order = res.data;
                   <h2 className="md:text-[18px] text-md font-bold text-black">Actual Price: </h2> <h2 className="md:text-[20px] text-[20px] text-[#2D6A2D] font-semibold">₹ {total + (total * 25 / 100)}</h2>
                     </div>
                     <div className="flex justify-between items-center gap-2 border-b border-b-gray-400 md:pb-2 pb-1">
-                  <h2 className="md:text-[18px] text-md font-bold text-black">Discount:</h2> <h2 className="md:text-[20px] text-[20px] md:ml-83 ml-27 text-[#2D6A2D] font-bold">- ₹ {total * 25 / 100}</h2>
+                  <h2 className="md:text-[18px] text-md font-bold text-black">Discount:</h2> <h2 className="md:text-[20px] text-[12px] md:ml-83 ml-27 text-[#2D6A2D] font-bold">- ₹ {total * 25 / 100}</h2>
                     </div>
                     <div className="flex justify-between gap-2 md:mt-2 mt-1">
                   <h2 className="md:text-[18px] text-md font-bold text-black">Total Price:</h2> <h2 className="md:text-[20px] text-[20px] md:ml-66 ml-12 text-[#2D6A2D] font-semibold">₹ {total}</h2>
