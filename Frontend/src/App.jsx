@@ -12,8 +12,9 @@ import AdminRoute from "./Routes/AdminRoutes";
 import PublicRoute from "./Routes/PublicRoutes";
 import ProtectedRoute from "./Routes/protectedRoute";
 
-const App = () => {
 
+const App = () => {
+   
     const router = createBrowserRouter([
         {
             path: "/",

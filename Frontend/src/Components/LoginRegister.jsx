@@ -46,6 +46,11 @@ const LoginRegister = ({ authModal, setAuthModal }) => {
       Name: user.displayName,
       Email:  user.email,
     });
+      
+   window.gtag("event", "login", {
+  method: "google", 
+  page: window.location.pathname
+});
 
          setUser(response.data.user);
       
@@ -70,6 +75,10 @@ const LoginRegister = ({ authModal, setAuthModal }) => {
       Email: authForm.email,
       Password: authForm.password
     });
+
+    window.gtag("event", "login", {
+    method: "email",
+  });
 
     setUser(res.data.user);
     console.log(res.data.user);

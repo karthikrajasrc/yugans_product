@@ -7,9 +7,11 @@ import { AuthContext } from "../../Authprovider";
 import toast from "react-hot-toast";
 import Spinner from "./Spinner";
 import ScrollToTop from "./top";
+import usePageTracking from "../usePageTracking";
 
 
 const Navbar = () => {
+    usePageTracking();
     const [page, setPage] = useState("home");
       const [cart, setCart] = useState([]);
     const [mobileMenu, setMobileMenu] = useState(false);

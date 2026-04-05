@@ -70,8 +70,8 @@ const handleCart = (id) => {
       <>
       <div className="bg-[#1E4A1E] py-12 sm:py-16 relative overflow-hidden">
         <Link to="/cart">
-          <div className="fixed z-30 px-2 py-2 bg-green-600 rounded-full shadow-lg right-5 md:right-20 md:bottom-21 bottom-12 cursor-pointer hover:bg-green-700 transition">
-            <div className="fixed z-30 bg-white rounded-lg p-1 shadow-lg right-5 md:right-20 md:bottom-22 bottom-12.5 cursor-pointer hover:bg-green-700 transition flex items-center gap-1 mb-7">
+          <div className="fixed z-30 px-2 py-2 bg-green-600 rounded-full shadow-lg right-8 md:right-20 md:bottom-21 bottom-15 cursor-pointer hover:bg-green-700 transition">
+            <div className="fixed z-30 bg-white rounded-lg p-1 shadow-lg right-8 md:right-20 md:bottom-22 bottom-15 cursor-pointer hover:bg-green-700 transition flex items-center gap-1 mb-7">
               <p className="text-[12px] font-bold">{cartItems.length }</p>
             </div>
             <div>

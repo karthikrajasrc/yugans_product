@@ -65,7 +65,7 @@ const [grams, setGrams] = useState("");
     setGrams("");
       setImageFile(null);
       setDescription("");
-      
+      setPreviewImage(""); 
       setShowAddProductForm(false)
       setProducts([...products, data.newProduct]);
   } catch (err) {
@@ -97,6 +97,8 @@ const [grams, setGrams] = useState("");
     setImageFile(null);
     setDescription("");
     setUpdateBtn(false);
+    setPreviewImage(""); // ✅ ADD THIS
+  setSelectedId(null);
   };
 
 
@@ -145,7 +147,9 @@ const [grams, setGrams] = useState("");
     catch (err) {
       console.error("Error updating product:", err);
       toast.error("Failed to update product");
-    }
+    }finally {
+    setLoading(false); 
+  }
     
   }
   

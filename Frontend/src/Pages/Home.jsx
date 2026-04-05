@@ -183,7 +183,7 @@ const Home = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
               {[
-                {name:"Varsha",loc:"Coimbatore",text:"Hi! My baby wasn't eating food properlt, so I bought 500Grms of MULTIGRAIN MIX from YUGAN'S PRODUCT. Now, My baby loves taking it and it's so nutritious!",stars:5},
+                {name:"Varsha",loc:"Coimbatore",text:"Hi! My baby wasn't eating food properly, so I bought 500Grms of MULTIGRAIN MIX from YUGAN'S PRODUCT. Now, My baby loves taking it and it's so nutritious!",stars:5},
                 {name:"Janani Alaguvel",loc:"Karur",text:"I had been feeding my baby with the Multigrain Mix and it was so nice to eat!",stars:5},
                 {name:"Meenachi",loc:"Chennai",text:"The multigrain mix is fantastic! My family loves it and it's so healthy and I have bought a Masala which is in aromatic style!",stars:5},
               ].map(t => (
